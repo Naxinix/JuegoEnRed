@@ -96,7 +96,7 @@ El juego estará implementado en Java con SpringBoot en el lado del servidor y e
 b00m Productions
 
 
-* Fernando Barroso Címbora. (f.barroso.2016@alumnos.urjc.es)
-* Diego Sagredo de Miguel.  (d.sagredo.2016@alumnos.urjc.es)
+* Fernando Barroso Címbora. (f.barroso.2016@alumnos.urjc.es) github: @Naxinix
+* Diego Sagredo de Miguel.  (d.sagredo.2016@alumnos.urjc.es) github: @DiegoKiller98
 
 
