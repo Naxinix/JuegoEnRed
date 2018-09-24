@@ -71,7 +71,7 @@ Clases: Disrupter, Assault, Strategist
 ## Estados del Juego e Interfaz.
   El juego tendrá 3 pantallas:
 
-- La **pantalla inicial**, con el título del juego. En esta pantalla se elige el nombre de usuario, el tipo de nave con el que queremos luchar y el botón de comenzar partida.
+- La **pantalla inicial**, con el título del juego. En esta pantalla se elige el nombre de usuario, el tipo de nave con el que queremos luchar y el botón de comenzar partida. Una vez seleccionamos comenzar partida, el juego nos llevará a una pantalla de 'buscando partida', en la que nos mostrará un temporizador global y se esperará a jugadores para comenzar el juego. Puede haber un máximo de 20 y un mínimo de 5 jugadores en una partida. Si se alcanzan los 20 jugadores antes de que acabe el temporizador, la partida comenzará. Si el temporizador llega a 0 y hay igual o más de 5 jugadores se comienza la partida con los que estén. Si el temporizador llega a 0 y hay menor que 5 personas el temporizador se reiniciará para esperar a jugadores.
 ![]( https://github.com/Naxinix/JuegoEnRed/blob/master/Pantalla%20de%20titulo.jpg)
 ![]( https://github.com/Naxinix/JuegoEnRed/blob/master/Seleccion%20de%20clases.jpg)
 - La **pantalla de juego**, propiamente dicha, en la que tendremos que controlar a nuestra nave. La interfaz de esta pantalla cuenta con:
