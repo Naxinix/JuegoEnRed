@@ -77,7 +77,7 @@ Clases: Disrupter, Assault, Strategist
   - Bajas cometidas. En la esquina superior derecha de la pantalla.
   - Carga de ataque especial. En el centro inferior de la pantalla.
   
-  https://github.com/Naxinix/JuegoEnRed/blob/master/Interfaz.jpg
+ 
   
   
 - La **pantalla de victoria** o de **game over**, dependiendo de nuestro resultado, y en ambas un botón para jugar otra partida.
