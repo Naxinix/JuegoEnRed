@@ -72,14 +72,14 @@ Clases: Disrupter, Assault, Strategist
   El juego tendrá 3 pantallas:
 
 - La **pantalla inicial**, con el título del juego. En esta pantalla se elige el nombre de usuario, el tipo de nave con el que queremos luchar y el botón de comenzar partida.
- 
-![](https://github.com/Naxinix/JuegoEnRed/blob/master/Interfaz.jpg
+![]( https://github.com/Naxinix/JuegoEnRed/blob/master/Pantalla%20de%20titulo.jpg)
+![]( https://github.com/Naxinix/JuegoEnRed/blob/master/Seleccion%20de%20clases.jpg)
 - La **pantalla de juego**, propiamente dicha, en la que tendremos que controlar a nuestra nave. La interfaz de esta pantalla cuenta con:
   - Barra de salud de nuestra nave. En la esquina inferior izquierda de la pantalla.
   - Bajas cometidas. En la esquina superior derecha de la pantalla.
   - Carga de ataque especial. En el centro inferior de la pantalla.
   
-![](https://github.com/Naxinix/JuegoEnRed/blob/master/Interfaz.jpg
+![](https://github.com/Naxinix/JuegoEnRed/blob/master/Interfaz.jpg)
   
   
 - La **pantalla de victoria** o de **game over**, dependiendo de nuestro resultado, y en ambas un botón para jugar otra partida.
