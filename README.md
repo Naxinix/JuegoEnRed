@@ -1,7 +1,7 @@
 # JuegoEnRed
 ## Título
 A Battle for the Stars
-## Plataforma
+## Plataforma 
 PC
 ## Versión
 1.0
