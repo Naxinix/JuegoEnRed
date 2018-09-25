@@ -56,7 +56,9 @@ Clases: Disrupter, Assault, Strategist
   Esta habilidad puede ser reposicionada en cualquier momento, pero solo se puede tener una activa a la vez. Una vez un enemigo la activa, la trampa desaparece.
 
   **Ultimate**: Puede soltar tres balizas creando un área triangular, en el que cualquier nave enemiga que lo atraviese será dañada y ralentizada. Estas balizas tienen una vida de 100 HP y pueden ser destruidas simplemente disparando. La trampa durará hasta que la destruyan o hasta que pase un tiempo determinado.
-  
+
+
+
       Power-ups
 Los power-ups serán habilidades de un solo uso que se nos proporcionará aleatoriamente al romper una nave loot. Un jugador puede tener hasta 4 power ups a la vez. De tener cuatro y romper una nave loot, el contenido no se nos otorgará.
 
