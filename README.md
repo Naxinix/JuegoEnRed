@@ -73,6 +73,8 @@ Los power-ups serán habilidades de un solo uso que se nos proporcionará aleato
     Diseño
 El diseño de las naves es único en cada clase y va acorde con su rol (diseños en papel). Un dato a destacar es que hay cada nave hay unas zonas de color especiales, que adoptarán un color aleatorio dentro del rango RGB para cada jugador al comenzar la partida. Esto está planteado para que el jugador se identifique con la unicidad de su nave y para que no haya dos naves iguales en la partida, pues si se encontraran dos de la misma clase y el mismo rol podría llevar a confusión.	
 
+![](https://github.com/Naxinix/JuegoEnRed/blob/master/Naves.jpg)
+  
     Música y efectos de sonido
 La música estará presente en todas las pantallas menos en la de juego, pues el sonido es un factor importante a la hora de jugar y podría verse opacado por música. El tema de la música de las demas pantallas será de estilo futurista y con temática espacial. 
 
@@ -127,6 +129,7 @@ Cuando se conecten 5, aparecerá el nuevo mensaje de aviso 'LA PARTIDA COMENZAR�
 
 ![]( https://github.com/Naxinix/JuegoEnRed/blob/master/Pantalla%20de%20titulo.jpg)
 ![]( https://github.com/Naxinix/JuegoEnRed/blob/master/Seleccion%20de%20clases.jpg)
+![]( https://github.com/Naxinix/JuegoEnRed/blob/master/Espera.jpg)
 - La **pantalla de juego**, propiamente dicha, en la que tendremos que controlar a nuestra nave. La interfaz de esta pantalla cuenta con:
   - Barra de salud de nuestra nave. En la esquina inferior izquierda de la pantalla.
   - Minimapa. En la esquina superior derecha de la pantalla.
