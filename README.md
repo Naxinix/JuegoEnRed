@@ -138,7 +138,7 @@ Cuando se conecten 5, aparecerá el nuevo mensaje de aviso 'LA PARTIDA COMENZAR�
   - Power ups disponibles. En la esquina inferior izquierda de la pantalla.
   - Feed. En el centro izquierda de la pantalla.
   
-![](https://github.com/Naxinix/JuegoEnRed/blob/master/Interfaz%v2.jpg)
+![](https://github.com/Naxinix/JuegoEnRed/blob/master/Interfaz%20v2.jpg)
   
   
 - La **pantalla de victoria** o de **game over**, dependiendo de nuestro resultado, y en ambas un botón para jugar otra partida que nos redigirá a la pantalla inicial.
