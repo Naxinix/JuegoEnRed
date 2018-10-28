@@ -93,7 +93,7 @@ Habrá efectos de sonido al pulsar botones de las pantallas previas. En la sala 
  Se sitúa ofreciendo una perspectiva cenital sobre la nave del jugador, manteniendo siempre al jugador en el centro de la pantalla y siguiendo a este en su movimiento por el mapa.
  
     Controles
- La nave se controla moviendo el ratón por la pantalla. La nave se dirigirá a donde se esté apuntando en todo momento. La nave dispara haciendo click con el botón izquierdo del ratón, y la dirección de disparo por defecto (sin power-ups) será en la que se esté apuntando. El ataque especial se libera pulsando Q cuando esté cargado. Los power ups se van stackeando en las teclas de los números 1, 2, 3, 4 y 5 conforme los vayamos consiguiendo, y para usarlos debemos puslar el número que se le haya asignado a cada uno.
+El movimiento de la nave se controla con las teclas W, A, S y D. La nave apuntará a la posición del ratón en todo momento. La nave dispara haciendo click con el botón izquierdo del ratón, y la dirección de disparo por defecto (sin power-ups) será en la que se esté apuntando. El ataque especial se libera pulsando Q cuando esté cargado. Los power ups se van stackeando en las teclas de los números 1, 2, 3, 4 y 5 conforme los vayamos consiguiendo, y para usarlos debemos puslar el número que se le haya asignado a cada uno.
   
     Puntuación 
  No existe una puntuación como tal, pues el ganador no es el que más puntuación tenga, sino el último que quede con vida. Así, pueden ser ambos ganadores tanto el que ha conseguido muchas bajas enemigas como el que ha ido conservador escondiéndose.
@@ -123,18 +123,16 @@ Cuando se conecten 5, aparecerá el nuevo mensaje de aviso 'LA PARTIDA COMENZAR�
 
        
 
-  El juego tendrá 5 pantallas:
+  El juego tendrá 6 pantallas:
 
-- La **pantalla inicial**, con el título del juego. En esta pantalla hay un espacio reservado para elegir el nombre de usuario y un botón de jugar que se debloqueará cuando pongamos algo en el campo del nombre. 
+- La **pantalla de menú**, con el título del juego. En esta pantalla hay dos botones, uno que nos lleva a la pantalla de cómo jugar y otro a la de selección de nave.
+
+-La **pantalla de cómo jugar**, que nos explica los controles y el objetivo del juego, así como elementos del mapa que pueden resultar confusos.
 
 - La **pantalla de selección de nave**, en la que tendremos las clases y un botón de información al lado de cada una que nos explicará sus características. De nuevo hay un botón de jugar que se desbloqueará una vez seleccionemos una haciendo click.
 
 - La **sala de espera**, donde se espera que el matchmaking nos una a una partida. En ella, hay un chat en la esquina derecha para hablar con los jugadores que también se encuentren en la sala y amenizar la espera. También hay un botón se salir en la parte unferior de la pantalla, que nos llevará a la pantalla inicial en el caso de pulsarlo. En grande y en el centro de la pantalla hay un espacio reservado para un aviso que puede mostrarnos dos mensajes, tanto 'BUSCANDO JUGADORES', como 'LA PARTIDA COMENZARÁ EN X TIEMPO', siendo X el temporizador descendente.
 
-
-![]( https://github.com/Naxinix/JuegoEnRed/blob/master/Pantalla%20de%20titulo.jpg)
-![]( https://github.com/Naxinix/JuegoEnRed/blob/master/Seleccion%20de%20clases.jpg)
-![](https://github.com/Naxinix/JuegoEnRed/blob/master/Espera.JPG)
 - La **pantalla de juego**, propiamente dicha, en la que tendremos que controlar a nuestra nave. La interfaz de esta pantalla cuenta con:
   - Barra de salud de nuestra nave. En la esquina inferior izquierda de la pantalla.
   - Minimapa. En la esquina superior derecha de la pantalla.
@@ -143,10 +141,7 @@ Cuando se conecten 5, aparecerá el nuevo mensaje de aviso 'LA PARTIDA COMENZAR�
   - Power ups disponibles. En la esquina inferior izquierda de la pantalla.
   - Feed. En el centro izquierda de la pantalla.
   
-![](https://github.com/Naxinix/JuegoEnRed/blob/master/Interfaz%20v2.jpg)
-  
-  
-- La **pantalla de victoria** o de **game over**, dependiendo de nuestro resultado, y en ambas un botón para jugar otra partida que nos redigirá a la pantalla inicial.
+- La **pantalla de victoria** o de **game over**, dependiendo de nuestro resultado, y en ambas dos botones, uno de 'reintentar' que nos lleva a la pantalla de selección de nave y otro de 'salir' que nos lleva a la pantalla de menú.
 
 ## Posibles ampliaciones y visión de futuro.
 En una primera instancia, la versión de salida de nuestro juego tendrá todo lo mencionado con anterioridad. En el caso, los elementos a desarrollar y epxlotar serían nuevas clases de naves con nuevas mecánicas y habilidades, así como nuevos power-ups que cambien el curso de la partida. Asimismo, si vieramos cierta necesidad y feedback del público se podrían meter nuevas características como jugar en escuadrón con amigos, ampliar el número de jugadores por partida, así como la posibilidad de hostear varias partidas al mismo tiempo.
