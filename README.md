@@ -119,7 +119,9 @@ Cuando se conecten 5, aparecerá el nuevo mensaje de aviso 'LA PARTIDA COMENZAR�
 
 ## Estados del Juego e Interfaz.
 
-![]( https://github.com/Naxinix/JuegoEnRed/blob/master/Untitled%20Diagram%20(1).png)
+![]( https://github.com/Naxinix/JuegoEnRed/repository/Escenas/Untitled%20Diagram%20(1).png)
+
+       
 
   El juego tendrá 5 pantallas:
 
