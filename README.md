@@ -119,7 +119,7 @@ Cuando se conecten 5, aparecer√° el nuevo mensaje de aviso 'LA PARTIDA COMENZAR√
 
 ## Estados del Juego e Interfaz.
 
-![]( https://github.com/Naxinix/JuegoEnRed/repository/Escenas/Untitled Diagram (1).png)
+![]( https://github.com/Naxinix/JuegoEnRed/blob/master/Diagrama.png)
 
        
 
