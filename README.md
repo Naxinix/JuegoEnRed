@@ -34,6 +34,8 @@ Además del ataque básico, cada nave cuenta con un ataque especial (o ultimate)
 Clases: Disrupter, Assault, Strategist
 - **Disrupter**:
 
+![]( https://github.com/Naxinix/JuegoEnRed/blob/master/Arte Final/Disrupter.png)
+
   La principal ventaja de la disrupter es su velocidad de movimiento, superior a la de las otras clases. Esto le permite entrar y salir de la batalla con mucha facilidad, asi como ser un objetivo dificil de acertar.
 
   Otra de sus características es la dispersión de balas. Al contar con una dispersión elevada, se debe jugar a corto alcance del enemigo para lograr hacer algo de daño, pues a más distancia más difícil será acertar al enemigo.
@@ -42,12 +44,16 @@ Clases: Disrupter, Assault, Strategist
 
 - **Assault**:
 
+![]( https://github.com/Naxinix/JuegoEnRed/blob/master/Arte Final/Assault.png)
+
   La nave assault se caraceriza por su precisión en el disparo (las balas salen siguiendo una línea recta, no hay dispersión) y por su daño por segundo, superior a las de las otras clases.
   
   Ya que su supervivencia reside en gran parte en su daño, necesita puntería para hacerse notar y tener un impacto en la partida, pues de lo contrario puede ser machacado fácilmente.
 
   **Ultimate**: La nave empieza a rotar sobre sí misma, soltando una gran cantidad de balas al mismo tiempo. Estas balas son más fuertes que las normales y dañan a cualquier nave enemiga que se acerque a cierta distancia.
 - **Strategist**:
+
+![]( https://github.com/Naxinix/JuegoEnRed/blob/master/Arte Final/Strategist.png)
 
   La principal característica de la nave strategist es su capacidad para colocar trampas.
 
