@@ -118,6 +118,9 @@ Cuando se conecten 5, aparecerá el nuevo mensaje de aviso 'LA PARTIDA COMENZAR�
 - Si un jugador se desconecta durante el tiempo del temporizador, volverá a aparecer el mensaje de buscando jugadores.
 
 ## Estados del Juego e Interfaz.
+
+![]( https://github.com/Naxinix/JuegoEnRed/blob/master/Untitled%20Diagram%20(1).png)
+
   El juego tendrá 5 pantallas:
 
 - La **pantalla inicial**, con el título del juego. En esta pantalla hay un espacio reservado para elegir el nombre de usuario y un botón de jugar que se debloqueará cuando pongamos algo en el campo del nombre. 
