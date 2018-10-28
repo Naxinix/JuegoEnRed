@@ -34,7 +34,7 @@ Además del ataque básico, cada nave cuenta con un ataque especial (o ultimate)
 Clases: Disrupter, Assault, Strategist
 - **Disrupter**:
 
-![]( https://github.com/Naxinix/JuegoEnRed/blob/master/Arte%20final/Disrupter.png)
+![]( https://github.com/Naxinix/JuegoEnRed/blob/master/Arte_final/Disrupter.png)
 
   La principal ventaja de la disrupter es su velocidad de movimiento, superior a la de las otras clases. Esto le permite entrar y salir de la batalla con mucha facilidad, asi como ser un objetivo dificil de acertar.
 
@@ -44,7 +44,7 @@ Clases: Disrupter, Assault, Strategist
 
 - **Assault**:
 
-![]( https://github.com/Naxinix/JuegoEnRed/blob/master/Arte%20final/Assault.png)
+![]( https://github.com/Naxinix/JuegoEnRed/Arte_final/Assault.png)
 
   La nave assault se caraceriza por su precisión en el disparo (las balas salen siguiendo una línea recta, no hay dispersión) y por su daño por segundo, superior a las de las otras clases.
   
@@ -53,7 +53,7 @@ Clases: Disrupter, Assault, Strategist
   **Ultimate**: La nave empieza a rotar sobre sí misma, soltando una gran cantidad de balas al mismo tiempo. Estas balas son más fuertes que las normales y dañan a cualquier nave enemiga que se acerque a cierta distancia.
 - **Strategist**:
 
-![]( https://github.com/Naxinix/JuegoEnRed/blob/master/Arte%20final/Strategist.png)
+![]( https://github.com/Naxinix/JuegoEnRed/blob/master/Arte_final/Strategist.png)
 
   La principal característica de la nave strategist es su capacidad para colocar trampas.
 
@@ -133,9 +133,15 @@ Cuando se conecten 5, aparecerá el nuevo mensaje de aviso 'LA PARTIDA COMENZAR�
 
 - La **pantalla de menú**, con el título del juego. En esta pantalla hay dos botones, uno que nos lleva a la pantalla de cómo jugar y otro a la de selección de nave.
 
--La **pantalla de cómo jugar**, que nos explica los controles y el objetivo del juego, así como elementos del mapa que pueden resultar confusos.
+![](https://github.com/Naxinix/JuegoEnRed/blob/master/repository/Escenas/Finales/Menu.JPG)
+
+- La **pantalla de cómo jugar**, que nos explica los controles y el objetivo del juego, así como elementos del mapa que pueden resultar confusos.
+
+![](https://github.com/Naxinix/JuegoEnRed/blob/master/repository/Escenas/Finales/ComoJugar.JPG)
 
 - La **pantalla de selección de nave**, en la que tendremos las clases y un botón de información al lado de cada una que nos explicará sus características. De nuevo hay un botón de jugar que se desbloqueará una vez seleccionemos una haciendo click.
+
+![](https://github.com/Naxinix/JuegoEnRed/blob/master/repository/Escenas/Finales/SeleccionClase.JPG)
 
 - La **sala de espera**, donde se espera que el matchmaking nos una a una partida. En ella, hay un chat en la esquina derecha para hablar con los jugadores que también se encuentren en la sala y amenizar la espera. También hay un botón se salir en la parte unferior de la pantalla, que nos llevará a la pantalla inicial en el caso de pulsarlo. En grande y en el centro de la pantalla hay un espacio reservado para un aviso que puede mostrarnos dos mensajes, tanto 'BUSCANDO JUGADORES', como 'LA PARTIDA COMENZARÁ EN X TIEMPO', siendo X el temporizador descendente.
 
@@ -147,7 +153,11 @@ Cuando se conecten 5, aparecerá el nuevo mensaje de aviso 'LA PARTIDA COMENZAR�
   - Power ups disponibles. En la esquina inferior izquierda de la pantalla.
   - Feed. En el centro izquierda de la pantalla.
   
+ ![](https://github.com/Naxinix/JuegoEnRed/blob/master/repository/Escenas/Finales/PantallaDeJuego.JPG)
+  
 - La **pantalla de victoria** o de **game over**, dependiendo de nuestro resultado, y en ambas dos botones, uno de 'reintentar' que nos lleva a la pantalla de selección de nave y otro de 'salir' que nos lleva a la pantalla de menú.
+
+![](https://github.com/Naxinix/JuegoEnRed/blob/master/repository/Escenas/Finales/Ending.JPG)
 
 ## Posibles ampliaciones y visión de futuro.
 En una primera instancia, la versión de salida de nuestro juego tendrá todo lo mencionado con anterioridad. En el caso, los elementos a desarrollar y epxlotar serían nuevas clases de naves con nuevas mecánicas y habilidades, así como nuevos power-ups que cambien el curso de la partida. Asimismo, si vieramos cierta necesidad y feedback del público se podrían meter nuevas características como jugar en escuadrón con amigos, ampliar el número de jugadores por partida, así como la posibilidad de hostear varias partidas al mismo tiempo.
