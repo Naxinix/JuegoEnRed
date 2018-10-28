@@ -51,11 +51,11 @@ Clases: Disrupter, Assault, Strategist
 
   La principal característica de la nave strategist es su capacidad para colocar trampas.
 
-  La trampa básica se coloca en un punto del mapa que decida el jugador, y engancha al enemigo que pase por el radio de actuación de la trampa (el gancho funciona como proyectil, se puede esquivar). Mientras el enemigo esté en la trampa, este permanecerá inmóvil, siendo totalmente expuesto al ataque enemigo.
+  La trampa básica se coloca en un punto del mapa que decida el jugador, y engancha al enemigo que pase por el radio de actuación de la tramp. Mientras el enemigo esté en la trampa, este permanecerá inmóvil, siendo totalmente expuesto al ataque enemigo.
 
   Esta habilidad puede ser reposicionada en cualquier momento, pero solo se puede tener una activa a la vez. Una vez un enemigo la activa, la trampa desaparece.
 
-  **Ultimate**: Puede soltar tres balizas creando un área triangular, en el que cualquier nave enemiga que lo atraviese será dañada y ralentizada. Estas balizas tienen una vida de 100 HP y pueden ser destruidas simplemente disparando. La trampa durará hasta que la destruyan o hasta que pase un tiempo determinado.
+  **Ultimate**: La nave suelta bombas en un radio próximo que explotarán al contacto enemigo. Estas bombas tienen una vida de 100 HP y pueden ser destruidas simplemente disparando. Las bombas durarán hasta que la destruyan o hasta que pase un tiempo determinado.
 
 
 
@@ -93,7 +93,7 @@ Habrá efectos de sonido al pulsar botones de las pantallas previas. En la sala 
  Se sitúa ofreciendo una perspectiva cenital sobre la nave del jugador, manteniendo siempre al jugador en el centro de la pantalla y siguiendo a este en su movimiento por el mapa.
  
     Controles
- La nave se controla moviendo el ratón por la pantalla. La nave se dirigirá a donde se esté apuntando en todo momento. La nave dispara haciendo click con el botón izquierdo del ratón, y la dirección de disparo por defecto (sin power-ups) será en la que se esté apuntando. El ataque especial se libera pulsando Q cuando esté cargado. Los power ups se van stackeando en las teclas de las flechas conforme los vayamos consiguiendo, y para usarlos debemos puslar la flecha que se le haya asignado a cada uno.
+ La nave se controla moviendo el ratón por la pantalla. La nave se dirigirá a donde se esté apuntando en todo momento. La nave dispara haciendo click con el botón izquierdo del ratón, y la dirección de disparo por defecto (sin power-ups) será en la que se esté apuntando. El ataque especial se libera pulsando Q cuando esté cargado. Los power ups se van stackeando en las teclas de los números 1, 2, 3, 4 y 5 conforme los vayamos consiguiendo, y para usarlos debemos puslar el número que se le haya asignado a cada uno.
   
     Puntuación 
  No existe una puntuación como tal, pues el ganador no es el que más puntuación tenga, sino el último que quede con vida. Así, pueden ser ambos ganadores tanto el que ha conseguido muchas bajas enemigas como el que ha ido conservador escondiéndose.
