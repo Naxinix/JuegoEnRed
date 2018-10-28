@@ -44,7 +44,7 @@ Clases: Disrupter, Assault, Strategist
 
 - **Assault**:
 
-![]( https://github.com/Naxinix/JuegoEnRed/Arte%20final/Assault.png)
+![]( https://github.com/Naxinix/JuegoEnRed/blob/master/Arte%20final/Assault.png)
 
   La nave assault se caraceriza por su precisión en el disparo (las balas salen siguiendo una línea recta, no hay dispersión) y por su daño por segundo, superior a las de las otras clases.
   
