@@ -162,8 +162,19 @@ El juego estará implementado en Java con SpringBoot en el lado del servidor y e
 ## Estudio/Diseñadores
 b00m Productions
 
-
 * Fernando Barroso Címbora. (f.barroso.2016@alumnos.urjc.es) github: @Naxinix
 * Diego Sagredo de Miguel.  (d.sagredo.2016@alumnos.urjc.es) github: @DiegoKiller98
+
+## **IMPORTANTE:** Notas de los desarrolladores sobre la entrega de la FASE 2
+
+- Debido a la imposibilidad de manejar a dos personajes a la vez para emular un jugador enemigo on-line de las futuras fases (ya que la camara debe seguir a uno, el otro jugador no se veria a si mismo), se ha incorporado una Nave Dummy enemiga que simularía un jugador enemigo. La Nave Dummy es estática, y dispara siempre en la posición de nuestra nave controlable. Se puede matar a la nave Dummy y ella nos puede matar a nosotros.
+- En cuanto a la **clase Strategist**, hay un par de apuntes:
+	- Ante la falta de enemigos, hemos implementado que la trampa y la ultimate de esta clase hagan daño a la nave que las lanza 		 **para mostrar su funcionalidad** pero esto no sería así en la versión final del juego, afectando solo a naves enemigas.
+	- Para poder mostrar la funcionalidad de la trampa por la nave que la coloca, hemos implentado que aparezca en una posicion fija  	    del mapa cuando el jugador la lanza, para poder acercarse a ella y que le haga efecto. Si la colocara en su posición, nada mas 	     ponerla se activaría. En la versión final del juego esta se coloca en la posicion de la nave controlable por el jugador y sólo           afectara a naves enemigas.
+- En esta fase no esta disponible la pantalla de esperando jugadores debido a la característica local del juego.
+- En esta fase, no está disponible el chat, el feed ni las bajas cometidas, debido a la ausencia de jugadores enemigos.
+- En esta fase, sólo están disponibles los power-ups 'Armadura' y 'Carga'.
+- En esta fase no está disponible cualquier sonido, tanto música ambiental como efectos de sonido.
+
 
 
