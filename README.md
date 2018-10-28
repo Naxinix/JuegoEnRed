@@ -1,6 +1,6 @@
 # JuegoEnRed
 ## Título
-A Battle for the Stars
+Cursed Stars
 ## Plataforma 
 PC
 ## Versión
