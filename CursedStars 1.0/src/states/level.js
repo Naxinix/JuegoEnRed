@@ -29,6 +29,7 @@ var c;
 var polvo = new Array(50);
 
 var bh = new Array(10);
+var posbh = new Array(10);
 var i = 0;
 
 var auxPE = 0;
@@ -292,8 +293,8 @@ function counterBH(){
             i++;
         }
         
-        posbh = game.add.sprite(600+(bh[i-1].position.x/factorX),50+(bh[i-1].position.y/factorY),'blackhole2');
-        posbh.fixedToCamera = true;
+        posbh[i-1].visible = true;
+        game.world.bringToTop(posbh[i-1]);
     
         auxBH = 0;
     }
@@ -308,8 +309,8 @@ function createLootShip(){
         }else{
             claseLoot = new NaveLoot();
 
-            a2=Math.floor(Math.random()*worldsize[0]-100);//margen de 100 pixeles para evitar que se generen en el borde del mundo
-            b2=Math.floor(Math.random()*worldsize[1]-100);
+            a2=Math.floor(Math.random()*(worldsize[0]-200));//margen de 200 pixeles para evitar que se generen en el borde del mundo
+            b2=Math.floor(Math.random()*(worldsize[1]-200));
 
             lootShipParent = game.add.sprite(a2, b2, null);
             lootShip = game.add.sprite(0, 0, claseLoot.sprite);
@@ -411,6 +412,7 @@ Project.levelState.prototype = {
         //loop para gestion de trampa Strategist
         game.time.events.loop(Phaser.Timer.HALF, trap, this);
 
+        counter = 0;
         //texto ultis
         text = game.add.text(360, 485,  '0%',
         { font: "24px Arial", fill: "#808080", align: "center" });
@@ -421,8 +423,8 @@ Project.levelState.prototype = {
         polvoSprite = ['polvoEstelarAzul','polvoEstelarVerde','polvoEstelarAmarillo'];
 
         for(o=0;o<50;o++){
-            a3=Math.floor(Math.random()*worldsize[0]-100);
-            b3=Math.floor(Math.random()*worldsize[1]-100);
+            a3=Math.floor(Math.random()*(worldsize[0]-100));
+            b3=Math.floor(Math.random()*(worldsize[1]-100));
             polvo[o]=game.add.sprite(a3,b3,polvoSprite[game.rnd.between(0,2)]);
             game.world.sendToBack(polvo[o]);
             game.world.moveUp(polvo[o]);
@@ -431,8 +433,8 @@ Project.levelState.prototype = {
         }
 
         for(m=0;m<10;m++){
-            a=Math.floor(Math.random()*worldsize[0]-100);
-            b=Math.floor(Math.random()*worldsize[0]-100);
+            a=Math.floor(Math.random()*(worldsize[0]-300));
+            b=Math.floor(Math.random()*(worldsize[1]-300));
             bh[m] = game.add.sprite(a,b,'blackhole');
             game.world.sendToBack(bh[m]);
             game.world.moveUp(bh[m]);
@@ -440,6 +442,10 @@ Project.levelState.prototype = {
             bh[m].visible=false;
             bh[m].anchor.setTo(0.5,0.5);
             bh[m].body.setCircle(120);//colision circular
+
+            posbh[m] = game.add.sprite(600+((bh[m].position.x-bh[m].offsetX)/factorX),50+((bh[m].position.y-bh[m].offsetY)/factorY),'blackhole2');
+            posbh[m].fixedToCamera = true;
+            posbh[m].visible = false;
         } 
 
         //añadimos la barra de vida
