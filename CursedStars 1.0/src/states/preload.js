@@ -5,6 +5,10 @@ Project.preloadState = function(game) {
 Project.preloadState.prototype = {
 
     preload: function() {
+        var l = game.add.sprite(game.world.centerX-150, game.world.centerY-112, 'loading');
+        idle = l.animations.add('idle');
+        l.animations.play('idle', 5, true);
+
         game.load.image('background','../assets/images/background.jpg');
         game.load.image('minimap','../assets/images/interface/Minimap.jpg');
         game.load.image('position','../assets/images/sprites/position.jpg');
@@ -53,7 +57,6 @@ Project.preloadState.prototype = {
     },
 
     create: function() {
-        
         this.state.start('menuState');
     },
 
