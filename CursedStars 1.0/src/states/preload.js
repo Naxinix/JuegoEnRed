@@ -60,6 +60,7 @@ Project.preloadState.prototype = {
     },
 
     create: function() {
+        sonando=false;
         this.state.start('menuState');
     },
 
