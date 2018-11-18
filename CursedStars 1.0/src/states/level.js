@@ -20,6 +20,12 @@ Project.levelState.prototype = {
         createPolvoEstelar();
         createBlackHole();
         
+        sonando=false;
+        music.pause();
+        beamm= game.add.audio('beamm');
+        beamm.loopFull();
+        beamm.volume=0.1;
+        
         //se inicializan las variables necesarias
         initClases();
         initUltimates();
