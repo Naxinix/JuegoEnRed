@@ -1,6 +1,16 @@
 Project.menuState = function(game) {
 
 }
+function start(){
+    music.fadeIn(4000);
+}
+
+function overplay(){
+    button.play();
+}
+function overcomo(){
+    button.play();
+}
 
 Project.menuState.prototype = {
 
@@ -20,10 +30,17 @@ Project.menuState.prototype = {
         play.scale.setTo(0.7,0.7);
         play.inputEnabled = true;
         play.events.onInputDown.add(this.listener, this);
+        play.events.onInputOver.add(overplay, this);
 
         como.scale.setTo(0.7,0.7);
         como.inputEnabled = true;
         como.events.onInputDown.add(this.listener2, this);
+               como.events.onInputOver.add(overcomo, this);
+
+        music = game.add.audio('menu');
+        if(!sonando){
+        music.onDecoded.add(start, this);
+        sonando=true;
 
     },
 
