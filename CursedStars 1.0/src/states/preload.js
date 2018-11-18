@@ -54,9 +54,13 @@ Project.preloadState.prototype = {
         game.load.image('selectedDisrupter','../assets/images/sprites/SelectedDisrupter.png');
         game.load.image('selectedAssault','../assets/images/sprites/SelectedAssault.png');
         game.load.image('selectedStrategist','../assets/images/sprites/selectedStrategist.png');
+        game.load.audio('menu', '../assets/audio/menu.mp3');
+        game.load.audio('button', '../assets/audio/button.mp3');
+        game.load.audio('beamm', '../assets/audio/beamm.mp3');
     },
 
     create: function() {
+        sonando=false;
         this.state.start('menuState');
     },
 

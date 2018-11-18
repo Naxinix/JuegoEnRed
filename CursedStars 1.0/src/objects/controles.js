@@ -35,7 +35,8 @@ function controles() {
     if (clase.fireButton.isDown)
     {
         clase.weapon.fireAtPointer();
-
+          if(!beamm.isPlaying)
+            beamm.play();
         //Disparo de escopeta para strategist
         if(classSelected == 3)
         {
