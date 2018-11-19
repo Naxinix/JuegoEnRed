@@ -11,7 +11,7 @@ Project.matchingState.prototype = {
 
     create: function() {
     	
-    	this.createPlayer();
+    	createPlayer();
     	/*
     	$.ajax({
     		method : "POST",
@@ -70,35 +70,12 @@ Project.matchingState.prototype = {
         style = { font: "40px Times New Roman", fill: "#FFFFFF", align: "center" };
         n_jugadores = game.add.text(300, 100, text, style);
         */
-    	this.getNumPlayers(function (numPlayers) {
-			if (numPlayers.length === 2) {
-				console.log ('##### COMIENZA EL JUEGO #####');
-				game.state.start('levelState');
-			}
-		});
-    
-    },
-    
-    getNumPlayers: function (callback) {
-        $.ajax({
-            url: 'http://localhost:8080/jugadores',
-        }).done(function (data) {
-            callback(data);
-        })
-    },
-    
-    createPlayer: function () {
-        $.ajax({
-            method: "POST",
-            url: 'http://localhost:8080/jugadores',
-            processData: false,
-            headers: {
-                "Content-Type": "application/json"
-            },
-        }).done(function (data) {
-            console.log("Player created: " + JSON.stringify(data));
-           game.player1 = data
-        })
+    	getNumPlayers(function (numPlayers) {
+		if (numPlayers.length === 2) {
+			console.log ('##### COMIENZA EL JUEGO #####');
+			game.state.start('levelState');
+		}
+	});
     }
 }
 

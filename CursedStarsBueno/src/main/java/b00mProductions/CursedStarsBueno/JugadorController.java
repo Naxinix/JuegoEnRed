@@ -43,6 +43,7 @@ public class JugadorController {
 		jugador.setX(rnd.nextInt(700));
 		jugador.setY(rnd.nextInt(500));
 		jugador.setRot(0.0);
+		jugador.setClassS(0);
 		jugadores.put(jugador.getId(), jugador);
 		return jugador;
 	}
