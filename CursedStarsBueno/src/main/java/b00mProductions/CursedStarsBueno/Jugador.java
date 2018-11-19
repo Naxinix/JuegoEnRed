@@ -4,6 +4,7 @@ public class Jugador{
 	private long id;
 	private int x, y;
 	private double rot;
+	private int classS;
 	
 	
 	Jugador(){
@@ -40,5 +41,13 @@ public class Jugador{
 
 	public void setRot(double rot) {
 		this.rot = rot;
+	}
+	
+	public int getClassS() {
+		return classS;
+	}
+
+	public void setClassS(int classS) {
+		this.classS = classS;
 	}
 }
