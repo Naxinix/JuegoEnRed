@@ -7,6 +7,8 @@ public class Jugador{
 	private boolean disparando;
 	private int classS;
 	private boolean alive;
+	private boolean usingUlt;
+	private boolean deployed;
 	
 	
 	Jugador(){
@@ -73,5 +75,25 @@ public class Jugador{
 
 	public void setAlive(boolean alive) {
 		this.alive = alive;
+	}
+
+
+	public boolean isUsingUlt() {
+		return usingUlt;
+	}
+
+
+	public void setUsingUlt(boolean usingUlt) {
+		this.usingUlt = usingUlt;
+	}
+
+
+	public boolean isDeployed() {
+		return deployed;
+	}
+
+
+	public void setDeployed(boolean deployed) {
+		this.deployed = deployed;
 	}
 }
