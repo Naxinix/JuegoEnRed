@@ -133,11 +133,11 @@ Cuando se conecten 5, aparecerá el nuevo mensaje de aviso 'LA PARTIDA COMENZAR�
 
 - La **pantalla de carga**, que permanece activa mientras se cargan los assets, de tal modo que el jugador sepa lo que esta pasando.
 
-![](https://github.com/Naxinix/JuegoEnRed/blob/master/repository/Escenas/loading.PNG)
+![](https://github.com/Naxinix/JuegoEnRed/blob/master/repository/Escenas/loading.png)
 
 - La **pantalla de menú**, con el título del juego. En esta pantalla hay dos botones, uno que nos lleva a la pantalla de cómo jugar y otro a la de selección de nave.
 
-![](https://github.com/Naxinix/JuegoEnRed/blob/master/repository/Escenas/menu.JPG)
+![](https://github.com/Naxinix/JuegoEnRed/blob/master/repository/Escenas/menu.jpg)
 
 - La **pantalla de cómo jugar**, que nos explica los controles y el objetivo del juego, así como elementos del mapa que pueden resultar confusos.
 
@@ -149,7 +149,7 @@ Cuando se conecten 5, aparecerá el nuevo mensaje de aviso 'LA PARTIDA COMENZAR�
 
 - La **sala de espera**, donde se espera que el matchmaking nos una a una partida. En ella, hay un chat en la esquina derecha para hablar con los jugadores que también se encuentren en la sala y amenizar la espera. También hay un botón se salir en la parte unferior de la pantalla, que nos llevará a la pantalla inicial en el caso de pulsarlo. En grande y en el centro de la pantalla hay un espacio reservado para un aviso que puede mostrarnos dos mensajes, tanto 'BUSCANDO JUGADORES', como 'LA PARTIDA COMENZARÁ EN X TIEMPO', siendo X el temporizador descendente.
 
-![](https://github.com/Naxinix/JuegoEnRed/blob/master/repository/Escenas/matching.JPG)
+![](https://github.com/Naxinix/JuegoEnRed/blob/master/repository/Escenas/matching.jpg)
 
 - La **pantalla de juego**, propiamente dicha, en la que tendremos que controlar a nuestra nave. La interfaz de esta pantalla cuenta con:
   - Barra de salud de nuestra nave. En la esquina inferior izquierda de la pantalla.
