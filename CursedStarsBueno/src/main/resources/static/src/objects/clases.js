@@ -1,7 +1,8 @@
 function initClases(){
     //variable que contendrá el tipo de clase seleccionada
     clase = 0;
-
+    claseLoot=null;
+    
     //nave jugador
     spaceshipParent = new Array(playersMax);
     spaceship = new Array(playersMax);
@@ -12,12 +13,16 @@ function initClases(){
 
     //variable para controlar el giro de la nave loot
     lootShipDir = 0;
-
+    lootPosX=0;
+    lootPosY=0;
+    
+    
     //variables relativas a la habilidad graviton del Strategist
     area = game.add.sprite(0, 0, null);
     grav = game.add.sprite(0, 0, null);
     gravActive = false;
     isTrapped = false;
+    imTrapped= false;
     trapTime = 0;
 }
 
@@ -31,7 +36,8 @@ class Disrupter {
         this.sprite = 'disrupter';
         this.damage = 10; //daño que inflinge cada bala
         this.alive=true;
-
+        this.usingUlt=false;
+        
         //bullets
         this.weapon = game.add.weapon(60, 'bullet');
         this.weapon.bulletSpeed = 1000;
@@ -51,8 +57,9 @@ class Assault {
         this.maxHealth = maxHealth;
         this.health = maxHealth;
         this.sprite = 'assault';
-        this.damage = 10;
+        this.damage = 20;
         this.alive=true;
+        this.usingUlt=false;
 
         //bullets
         this.weapon = game.add.weapon(300, 'bullet');
@@ -76,6 +83,8 @@ class Strategist {
         this.sprite = 'strategist';
         this.damage = 20;
         this.alive=true;
+        this.usingUlt=false;
+        //this.deployed=false;
 
         //bullets
         this.weapon = game.add.weapon(5, 'bullet');
@@ -113,10 +122,11 @@ function recieveDMG(damageValue){
 function setGrav(){
     next = 0;
     if(next>game.time.now){return;}
-    area = game.add.sprite(game.world.centerX-250,game.world.centerY-250,'area2'); //area es el rango de acción del graviton
-    game.world.sendToBack(area);
+    area = game.add.sprite(spaceshipParent[0].x,spaceshipParent[0].y,'area2'); //area es el rango de acción del graviton
     game.physics.enable(area, Phaser.Physics.ARCADE); 
-    grav = game.add.sprite(game.world.centerX,game.world.centerY,'graviton'); //grav es el sprite del graviton
+    //area.visible=false;
+    game.world.sendToBack(area);
+    grav = game.add.sprite(spaceshipParent[0].x,spaceshipParent[0].y,'graviton'); //grav es el sprite del graviton
 
 
     next = game.time.now + 1000; // delay de 1 segundo por cada graviton, evitando asi poner infinitos
@@ -127,13 +137,29 @@ function setGrav(){
 function trap(){
     if(isTrapped){
         if(trapTime<6){
-            clase.maxSpeed = 0;
+            clase2.maxSpeed = 0;
             trapTime++;
         }else{
             area.destroy();
             grav.destroy();
             gravActive = false;
             isTrapped = false;
+            trapTime = 0;
+            clase2.maxSpeed = clase2.resetSpeed;
+        }
+    }
+}
+
+function trapMe(){
+    if(imTrapped){
+        if(trapTime<6){
+            clase.maxSpeed = 0;
+            trapTime++;
+        }else{
+            areaEnemy.destroy();
+            gravEnemy.destroy();
+            enemyGravActive = false;
+            imTrapped = false;
             trapTime = 0;
             clase.maxSpeed = clase.resetSpeed;
         }
@@ -147,19 +173,22 @@ function killGrav(){
     gravActive = false;
 }
 
+/*
 function updateGrav(playerIndex){
     //Overlap y efecto con el area de efecto de la trampa del strategist (hace que esta sea visible y pone la variable ‘esta atrapado’ a verdadera
-    game.physics.arcade.overlap(spaceshipParent[playerIndex],area,function(){isTrapped=true; game.world.moveUp(area);});
+    game.physics.arcade.overlap(spaceshipParent[1],area,function(){isTrapped=true; game.world.moveUp(area);});
 }
-
+*/
 //crea el sprite de la nave e inicializa las variables genericas de las naves
 function createSpaceship(playerIndex,playerClass,bot,x,y){
    
 
     spaceshipParent[playerIndex] = game.add.sprite(x, y, null);
     spaceship[playerIndex] = game.add.sprite(0, 0, playerClass.sprite);
+    
     idle = spaceship[playerIndex].animations.add('idle');
     spaceship[playerIndex].animations.play('idle', 10, true);
+    
     spaceshipParent[playerIndex].addChild(spaceship[playerIndex]);
 
     //propiedades comunes a las 3 naves
@@ -174,6 +203,15 @@ function createSpaceship(playerIndex,playerClass,bot,x,y){
         playerClass.weapon.bulletKillType = Phaser.Weapon.KILL_LIFESPAN;
         playerClass.weapon.bulletLifespan = 900;
         playerClass.fireButton = game.input.activePointer.leftButton;
+        
+        explosions=game.add.group();
+        
+        for(var i=0; i<50; i++){
+        	exploAux=game.add.sprite(-1000, -1000, 'hit');
+        	exploAux.scale.setTo(0.075,0.075);
+        	exploAux.anchor.setTo(0.5,0.5);
+        	explosions.add(exploAux);
+        }
     } else{
         //el bot trackea al jugador 0. Esto es para las pruebas offline
         playerClass.weapon.trackSprite(spaceship[playerIndex], 0, 0);
@@ -194,7 +232,7 @@ function createSpaceship(playerIndex,playerClass,bot,x,y){
     spaceshipParent[playerIndex].addChild(enemylf2);
     spaceshipParent[playerIndex].addChild(enemylf1);
 
-    if(!bot){
+    if(playerIndex == 0){
         enemylf1.visible = false;
         enemylf2.visible = false;
     }
@@ -209,11 +247,11 @@ function createSpaceship(playerIndex,playerClass,bot,x,y){
     spaceshipParent[playerIndex].body.collideWorldBounds = true;
 }
 
-function updateSpaceship(playerIndex, playerClass, bot){
+function updateSpaceship(playerIndex, playerClass, bot, target){
     //Rotacion y aceleracion de la naves
     spaceship[playerIndex].rotation = game.physics.arcade.angleToPointer(spaceshipParent[playerIndex]);
     
-    if(!bot){
+   
         spaceshipParent[playerIndex].body.acceleration.x = 0;
         spaceshipParent[playerIndex].body.acceleration.y = 0;
         
@@ -224,45 +262,53 @@ function updateSpaceship(playerIndex, playerClass, bot){
         spaceshipParent[playerIndex].body.maxVelocity.y = playerClass.maxSpeed;
         spaceshipParent[playerIndex].body.drag.x = playerClass.drag;
         spaceshipParent[playerIndex].body.drag.y = playerClass.drag;
-    }
+    
 
     //si es un bot debera apuntar hacia el jugador y disparar
     if(bot){
-        spaceship[playerIndex].rotation = game.physics.arcade.angleBetween(spaceshipParent[playerIndex], spaceshipParent[0]);
-        if(playerClass != null) playerClass.weapon.fireAtSprite(spaceship[0]);
+        spaceship[playerIndex].rotation = game.physics.arcade.angleBetween(spaceshipParent[playerIndex], spaceshipParent[target]);
+        if(playerClass != null) playerClass.weapon.fireAtSprite(spaceship[target]);
     }
 
     //representacion visual de la salud de la nave y gestion de la muerte de la misma
     if(playerClass != null) if(playerClass.health > 0)
     {
+    	if(playerIndex!=0){
         enemylf2.width = playerClass.maxHealth;
         enemylf1.width = playerClass.health;
+    	}
     } else
     {
         enemylf1.width = 0;
         spaceshipParent[playerIndex].destroy();
+        win=false;
+        clase.alive=false;
         return true;
     }
 }
 
 function createLootShip(){
     //el slot 20 del array de jugadores se reserva para claseLoot (al final caben 20 jugadores + 1 nave loot)
-    players[20] = new Player(20, claseLoot);
     spaceshipParent[20] = lootShip;
     
     //se modifica la direccion de la nave loot en un valor aleatorio entre -0.01 y 0.01
-    lootShipDir = ((game.rnd.frac())*2 - 1)/100;
+    if(game.player.id==1) lootShipDir = ((game.rnd.frac())*2 - 1)/100;
     if(claseLoot == null){
         //bucle que espera 10 segundos y crea una nave Loot en una posicion random del mundo
         if(auxLS<10){
             auxLS++;
         }else{
             claseLoot = new NaveLoot(200,1000);
-
-            a2=Math.floor(Math.random()*(worldsize[0]-200));//margen de 200 pixeles para evitar que se generen en el borde del mundo
-            b2=Math.floor(Math.random()*(worldsize[1]-200));
+            if(game.player1.id==1){
+            lootPosX=Math.floor(Math.random()*(worldsize[0]-200));//margen de 200 pixeles para evitar que se generen en el borde del mundo
+            lootPosY=Math.floor(Math.random()*(worldsize[1]-200));
+            }else{
+            	lootPosX=0;
+            	lootPosY=0;
+            }
+            
             //sprite vacio para evitar que la barra de vida de la nave gire junto a la misma. lootShipParent contiene a lootShip(el sprite que se visualiza y gira) y la barra de vida.
-            lootShipParent = game.add.sprite(a2, b2, null);
+            lootShipParent = game.add.sprite(lootPosX, lootPosY, null);
             lootShip = game.add.sprite(0, 0, claseLoot.sprite);
 
             idle3 = lootShip.animations.add('idle3');
@@ -294,15 +340,23 @@ function createLootShip(){
     }
 }
 
-function updateLootship(whoShotMrLootShip){
-    //rotacion nave loot
-    lootShip.rotation += lootShipDir;
+function updateLootship(){
 
     //movimiento nave loot
     if(claseLoot != null){
+    	if(game.player1.id==1){
+        //rotacion nave loot
+        lootShip.rotation += lootShipDir
+        
         //la nave se movera con una velocidad maxSpeed en la direccion que apunta
         lootShipParent.body.acceleration.x = claseLoot.maxSpeed*Math.cos(lootShip.rotation);
         lootShipParent.body.acceleration.y = claseLoot.maxSpeed*Math.sin(lootShip.rotation);
+        lootPosX= lootShipParent.x;
+        lootPosY= lootShipParent.y;
+        }else{
+        	lootShipParent.x=lootPosX;
+        	lootShipParent.y=lootPosY;
+        }
     }
 
     //representacion visual de la salud de la nave loot y gestion de la muerte de la misma
@@ -317,12 +371,14 @@ function updateLootship(whoShotMrLootShip){
         lootShip.kill();
         claseLoot = null;
         //al morir la nave loot otorga un powerUp aleatorio al jugador que la ha matado
+        if(game.player1.id == 1){
         auxRnd = game.rnd.between(0,1);
-        whoShotMrLootShip.powerUp[auxRnd] = true;
+        clase.powerUp[auxRnd] = true;
         if(auxRnd == 0){
             chargePUsprite.loadTexture('chargePUOn', 0);
         } else if(auxRnd == 1){
             speedBoostPUsprite.loadTexture('speedBoostPUOn', 0);
         }
     }
+  }
 }
