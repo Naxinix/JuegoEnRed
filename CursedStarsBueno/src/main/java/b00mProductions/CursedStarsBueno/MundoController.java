@@ -44,6 +44,7 @@ public class MundoController {
 			Vector<Integer> v = new Vector<Integer>();
 			v.add(0,rnd.nextInt(3000));
 			v.add(1,rnd.nextInt(3000));
+			v.add(2,0);
 			
 			polvoP.add(v);
 			
@@ -60,6 +61,10 @@ public class MundoController {
 		
 		mundo.setPolvoPos(polvoP);
 		mundo.setBhPos(bhP);
+		mundo.setLsRot(0);
+		mundo.setLsPosX(0);
+		mundo.setLsPosY(0);
+		mundo.setLsHp(1000);
 		return mundo;
 		
 		
@@ -76,7 +81,7 @@ public class MundoController {
 		}
 	}
 
-	// Con este PUT actualizamos la información del jugador con ID = id
+	
 	@PutMapping(value = "/mundo")
 	public ResponseEntity<Mundo> updateMundo(@RequestBody Mundo savedMundo) {
 
