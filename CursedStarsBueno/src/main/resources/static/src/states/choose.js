@@ -15,8 +15,8 @@ Project.chooseState.prototype = {
     create: function() {
         classSelected = 0;
         classSelected2 = 0;
-        var s = game.add.sprite(0, 0, 'background');
-        s.scale.setTo(1.5,1);
+        var s = game.add.tileSprite(0, 0,800,600, 'background');
+      //  s.scale.setTo(1.5,1);
         var t = game.add.sprite(40,0,'select');
         disrupterInfo=game.add.sprite(230, 100, 'disrupterinfo');
         game.physics.enable(disrupterInfo, Phaser.Physics.ARCADE);
