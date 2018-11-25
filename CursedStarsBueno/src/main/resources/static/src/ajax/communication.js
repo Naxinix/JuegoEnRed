@@ -16,7 +16,7 @@ window.onbeforeunload = function(){
 function getNumPlayers(callback) {
     $.ajax({
     	method: "GET",
-        url: 'http://10.0.4.144:8080/jugadores',
+        url: 'http://localhost:8080/jugadores',
         processData: false,
         headers: {
             "Content-Type": "application/json"
@@ -29,7 +29,7 @@ function getNumPlayers(callback) {
 function createPlayer() {
     $.ajax({
         method: "POST",
-        url: 'http://10.0.4.144:8080/jugadores',
+        url: 'http://localhost:8080/jugadores',
         processData: false,
         headers: {
             "Content-Type": "application/json"
@@ -48,10 +48,12 @@ function putPlayer() {
     	game.player1.rot= spaceship[0].rotation;
     	game.player1.disparando= clase.fireButton.isDown;
     	game.player1.alive= clase.alive;
+    	game.player1.usingUlt= clase.usingUlt;
+    	game.player1.deployed=gravActive;
     }
     $.ajax({
         method: "PUT",
-        url: 'http://10.0.4.144:8080/jugadores/' + game.player1.id,
+        url: 'http://localhost:8080/jugadores/' + game.player1.id,
         data: JSON.stringify(game.player1),
         processData: false,
         headers: {
@@ -65,7 +67,7 @@ function putPlayer() {
 function getPlayer(callback) {
     $.ajax({
         method: "GET",
-        url: 'http://10.0.4.144:8080/jugadores/' + game.player2.id,
+        url: 'http://localhost:8080/jugadores/' + game.player2.id,
         processData: false,
         headers: {
             "Content-Type": "application/json"
@@ -80,7 +82,7 @@ function getPlayer(callback) {
 function deletePlayer(playerId) {
     $.ajax({
         method: 'DELETE',
-        url: 'http://10.0.4.144:8080/jugadores/' + playerId
+        url: 'http://localhost:8080/jugadores/' + playerId
     }).done(function (player) {
         console.log("Deleted player " + playerId)
     })
@@ -90,7 +92,7 @@ function deletePlayer(playerId) {
 function createWorld() {
     $.ajax({
         method: "POST",
-        url: 'http://10.0.4.144:8080/mundo',
+        url: 'http://localhost:8080/mundo',
         processData: false,
         headers: {
             "Content-Type": "application/json"
@@ -104,10 +106,14 @@ function createWorld() {
 function putWorld() {
 	game.world1.polvoPos=polvo;
 	game.world1.bhPos=bh;
+	game.world1.lsRot=lootShip.rotation;
+	game.world1.lsPosX= lootPosX;
+	game.world1.lsPosY=lootPosY;
+	if(claseLoot!=null) game.world1.lsHP=claseLoot.health;
     
     $.ajax({
         method: "PUT",
-        url: 'http://10.0.4.144:8080/mundo',
+        url: 'http://localhost:8080/mundo',
         data: JSON.stringify(game.world1),
         processData: false,
         headers: {
@@ -121,7 +127,7 @@ function putWorld() {
 function getWorld(callback) {
     $.ajax({
         method: "GET",
-        url: 'http://10.0.4.144:8080/mundo',
+        url: 'http://localhost:8080/mundo',
         processData: false,
         headers: {
             "Content-Type": "application/json"

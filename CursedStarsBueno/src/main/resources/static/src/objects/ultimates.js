@@ -1,10 +1,13 @@
 function initUltimates(){
     //variables relativas a las ultis
+	ultMultiplier=0.1;
     counter = 0; //contador de carga de ultimate. 0-100
     ultCharged = false;
     ultiTime = 0; //tiempo de duracion de la ulti
     ultused = false; //true si la ultimate ha sido usada. Se pone a false cuando ultTime llega a su máximo valor
     bomb = new Array(10); //array de sprites
+    ultiassault=game.add.audio('ultiassault');
+    ultistrat=game.add.audio('ultistrat');
 }
 
 //FUNCION DE GESTION DE ULTIMATES
@@ -12,14 +15,6 @@ function initUltimates(){
 function updateUltimate(){
     if(counter<99){
         counter++;
-        ulti1.height = counter;
-        text.setText(counter+'%');
-    }
-    else{
-        ulti1.height=100;
-        text.setText('Q');
-        game.world.bringToTop(text);
-        ultCharged = true;
     }
 }
 
@@ -58,6 +53,7 @@ function disrupterTime(){
 
 //Ultimate de assault
 function assaultUltimate(){
+	ultiassault.play();
     game.add.tween(spaceship[0]).to( { angle: 1000 }, 3500, Phaser.Easing.Linear.None, true); //Rota el sprite
     clase.weapon.trackSprite(spaceship[0], 0, 0, true);
     clase.weapon.autofire = true; //dispara solo
@@ -76,6 +72,8 @@ function assaultTime(){
             clase.weapon.autofire = false;
             clase.weapon.bulletSpeed = 3000;
             clase.weapon.fireRate = 120;
+            clase.usingUlt=false;
+            done=false;
             ultused= false;
             ultCharged = false;
         }
@@ -86,6 +84,7 @@ function assaultTime(){
 function strategistUltimate(){
     //Circulo interior y exterior. Las bombas se disponen formando dos circulos //concentricos.
     //circulo interior
+	ultistrat.play();
     bomb[0] = game.add.sprite(spaceshipParent[0].x-spaceshipParent[0].offsetX+100,spaceshipParent[0].y-spaceshipParent[0].offsetY+75,'bomb');
     bomb[1] = game.add.sprite(spaceshipParent[0].x-spaceshipParent[0].offsetX-100,spaceshipParent[0].y-spaceshipParent[0].offsetY+75,'bomb');
     bomb[2] = game.add.sprite(spaceshipParent[0].x-spaceshipParent[0].offsetX,spaceshipParent[0].y-spaceshipParent[0].offsetY-100,'bomb');
@@ -120,6 +119,16 @@ function strategistTime(){
 }
 
 function updateUltimates(playerClass,playerIndex){
+	if(counter<99){
+    ulti1.height = counter;
+    text.setText(counter+'%');
+}
+else{
+    ulti1.height=100;
+    text.setText('Q');
+    game.world.bringToTop(text);
+    ultCharged = true;
+}
     //Ulti de strategist -100 de vida al colisionar
     for(j=0; j<10; j++){
             

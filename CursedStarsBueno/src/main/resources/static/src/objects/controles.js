@@ -27,6 +27,7 @@ function controles() {
             counter = 0;
             ultiTime = 0;
             ultused = true;
+            clase.usingUlt=true;
             clase.Ultimate();
         }
     }
@@ -35,6 +36,8 @@ function controles() {
     if (clase.fireButton.isDown)
     {
         clase.weapon.fireAtPointer();
+        if(!beamm.isPlaying)
+            beamm.play();
         
 
         //Disparo de escopeta para strategist
@@ -45,6 +48,8 @@ function controles() {
                 clase.weapon.fireAtPointer();
             }
         }
+    }else{
+        beamm.pause();
     }
     //Activa power-up guardado en el slot 1 
     if (game.input.keyboard.isDown(Phaser.Keyboard.ONE))
@@ -60,6 +65,7 @@ function controles() {
     if (game.input.keyboard.isDown(Phaser.Keyboard.RIGHT) && classSelected == 3)
     {
         if(gravActive==false)
+        	 //gravActive = true;
             setGrav();
     }
     //Te permite destruir una trampa con la tecla G, si eres de la clase strategist y hay un graviton activo

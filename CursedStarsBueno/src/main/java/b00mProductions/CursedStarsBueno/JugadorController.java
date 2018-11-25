@@ -46,6 +46,8 @@ public class JugadorController {
 		jugador.setDisparando(false);
 		jugador.setAlive(true);
 		jugador.setClassS(0);
+		jugador.setUsingUlt(false);
+		jugador.setDeployed(false);
 		jugadores.put(jugador.getId(), jugador);
 		return jugador;
 	}

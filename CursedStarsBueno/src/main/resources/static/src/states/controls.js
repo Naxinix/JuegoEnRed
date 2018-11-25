@@ -10,8 +10,8 @@ Project.controlsState.prototype = {
 
     create: function() {
 
-    var s = game.add.sprite(0, 0, 'background');
-    s.scale.setTo(1.5,1);
+    var s = game.add.tileSprite(0, 0, 800,600, 'background');
+    //s.scale.setTo(1.5,1);
 
     var volver=game.add.sprite(20, 540, 'volver');
     volver.scale.setTo(0.4,0.4);
