@@ -171,10 +171,15 @@ Diagrama de clases:
 
 ## Instrucciones de uso.
 1- Descargar la carpeta llamada "CursedStarsBueno"
+
 2- Abrir el proyecto con sts
+
 3- Abrir communication.js -> Ctrl+F y buscar localhost para hacer un replace All con tu ip (disponible ejecutando cmd y escribiendo ipconfig: La IP que buscamos es Ipv4)
+
 4- Abrir App.java y darle a Run as -> Java Application
+
 5- Una vez hecho esto en el navegador escribir "http://localhost:8080" o "http://ip:8080", donde ip será la IP del propietario
+
 6- Para que un segundo jugador se una a la partida deberá conectarse en una red LAN con el propietario del proyecto y escribir "http://ip:8080" (no se puede con localhost, pues es necesario acceder al PC del propietario del proyecto)
 
 ## Posibles ampliaciones y visión de futuro.
