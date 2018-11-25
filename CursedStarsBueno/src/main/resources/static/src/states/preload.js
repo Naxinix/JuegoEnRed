@@ -5,6 +5,11 @@ Project.preloadState = function(game) {
 Project.preloadState.prototype = {
 
     preload: function() {
+    	var l=game.add.sprite(game.world.centerX-150, game.world.centerY-112, 'loading');
+    	idle = l.animations.add('idle');
+    	l.animations.play('idle',5,true);
+    	
+    	
         game.load.image('background','../assets/images/background.jpg');
         game.load.image('minimap','../assets/images/interface/Minimap.jpg');
         game.load.image('position','../assets/images/sprites/position.jpg');
@@ -33,16 +38,20 @@ Project.preloadState.prototype = {
         game.load.image('playnoselected','../assets/images/interface/playnoselected.png');
         game.load.image('seleccionclase','../assets/images/interface/seleccionclase.png');
         game.load.image('comojugar','../assets/images/interface/comojugar.png');
+        game.load.image('seleccionclase_noselec','../assets/images/interface/seleccionclase_noselec.png');
+        game.load.image('comojugar_noselec','../assets/images/interface/comojugar_noselec.png');
         game.load.image('volver','../assets/images/interface/volver.jpg');
         game.load.image('disrupterinfo','../assets/images/interface/disrupterinfo.jpg');
         game.load.image('assaultInfo','../assets/images/interface/assaultInfo.jpg');
         game.load.image('strategistInfo','../assets/images/interface/strategistInfo.jpg');
         game.load.image('reintentar','../assets/images/interface/reintentar.jpg');
         game.load.image('salir','../assets/images/interface/salir.jpg');
+        game.load.image('reintentar_noselec','../assets/images/interface/reintentar_noselec.jpg');
+        game.load.image('salir_noselec','../assets/images/interface/salir_noselec.jpg')
         game.load.image('gameover','../assets/images/interface/gameover.png');
         game.load.image('controles','../assets/images/interface/controles.jpg');
         game.load.image('objetivo','../assets/images/interface/objetivo.jpg');
-        game.load.image('titulo','../assets/images/interface/titulo.png');
+        game.load.spritesheet('titulo','../assets/images/interface/tituloSpriteSheet.png',720,300,7);
         game.load.image('chargePU','../assets/images/interface/chargePU.png');
         game.load.image('speedBoostPU','../assets/images/interface/speedBoostPU.png');
         game.load.image('chargePUOn','../assets/images/interface/chargePUOn.png');
@@ -51,10 +60,21 @@ Project.preloadState.prototype = {
         game.load.image('selectedAssault','../assets/images/sprites/SelectedAssault.png');
         game.load.image('selectedStrategist','../assets/images/sprites/selectedStrategist.png');
         game.load.image('victoria','../assets/images/interface/victoria.png');
+        game.load.spritesheet('hit','../assets/images/sprites/hit.png',330,418,2);
+        game.load.image('playersFound0','../assets/images/interface/playersFound0.png');
+        game.load.image('playersFound1','../assets/images/interface/playersFound1.png');
+        game.load.image('playersFound2','../assets/images/interface/playersFound2.png');
+        game.load.audio('menu', '../assets/audio/menu.mp3');
+        game.load.audio('button', '../assets/audio/button.mp3');
+        game.load.audio('beamm', '../assets/audio/beamm.mp3');
+        game.load.audio('victoria', '../assets/audio/victoria.mp3');
+        game.load.audio('derrota', '../assets/audio/derrota.mp3');
+        game.load.audio('ultiassault', '../assets/audio/ultiassault.mp3');
+        game.load.audio('ultistrat', '../assets/audio/ultistrat.mp3');
     },
 
     create: function() {
-        
+    	sonando=false;
         this.state.start('menuState');
     },
 
