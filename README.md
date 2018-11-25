@@ -4,7 +4,7 @@ Cursed Stars
 ## Plataforma 
 PC
 ## Versión
-1.0
+2.0
 ## Sinopsis, jugabilidad y contenido
     Descripcion
 Se trata de un juego en 2D ambientado en el espacio en el que cada jugador maneja una nave en un entorno limitado.
@@ -129,11 +129,15 @@ Cuando se conecten 5, aparecerá el nuevo mensaje de aviso 'LA PARTIDA COMENZAR�
 
        
 
-  El juego tendrá 6 pantallas:
+  El juego tendrá 7 pantallas:
+
+- La **pantalla de carga**, que permanece activa mientras se cargan los assets, de tal modo que el jugador sepa lo que esta pasando.
+
+![](https://github.com/Naxinix/JuegoEnRed/blob/master/repository/Escenas/loading.png)
 
 - La **pantalla de menú**, con el título del juego. En esta pantalla hay dos botones, uno que nos lleva a la pantalla de cómo jugar y otro a la de selección de nave.
 
-![](https://github.com/Naxinix/JuegoEnRed/blob/master/repository/Escenas/Finales/Menu.JPG)
+![](https://github.com/Naxinix/JuegoEnRed/blob/master/repository/Escenas/menu.jpg)
 
 - La **pantalla de cómo jugar**, que nos explica los controles y el objetivo del juego, así como elementos del mapa que pueden resultar confusos.
 
@@ -144,6 +148,8 @@ Cuando se conecten 5, aparecerá el nuevo mensaje de aviso 'LA PARTIDA COMENZAR�
 ![](https://github.com/Naxinix/JuegoEnRed/blob/master/repository/Escenas/Finales/SeleccionClase.JPG)
 
 - La **sala de espera**, donde se espera que el matchmaking nos una a una partida. En ella, hay un chat en la esquina derecha para hablar con los jugadores que también se encuentren en la sala y amenizar la espera. También hay un botón se salir en la parte unferior de la pantalla, que nos llevará a la pantalla inicial en el caso de pulsarlo. En grande y en el centro de la pantalla hay un espacio reservado para un aviso que puede mostrarnos dos mensajes, tanto 'BUSCANDO JUGADORES', como 'LA PARTIDA COMENZARÁ EN X TIEMPO', siendo X el temporizador descendente.
+
+![](https://github.com/Naxinix/JuegoEnRed/blob/master/repository/Escenas/matching.jpg)
 
 - La **pantalla de juego**, propiamente dicha, en la que tendremos que controlar a nuestra nave. La interfaz de esta pantalla cuenta con:
   - Barra de salud de nuestra nave. En la esquina inferior izquierda de la pantalla.
@@ -158,6 +164,18 @@ Cuando se conecten 5, aparecerá el nuevo mensaje de aviso 'LA PARTIDA COMENZAR�
 - La **pantalla de victoria** o de **game over**, dependiendo de nuestro resultado, y en ambas dos botones, uno de 'reintentar' que nos lleva a la pantalla de selección de nave y otro de 'salir' que nos lleva a la pantalla de menú.
 
 ![](https://github.com/Naxinix/JuegoEnRed/blob/master/repository/Escenas/Finales/Ending.JPG)
+
+Diagrama de clases:
+
+![](https://github.com/Naxinix/JuegoEnRed/blob/master/DiagramaClases.PNG)
+
+## Instrucciones de uso.
+1- Descargar la carpeta llamada "CursedStarsBueno"
+2- Abrir el proyecto con sts
+3- Abrir communication.js -> Ctrl+F y buscar localhost para hacer un replace All con tu ip (disponible ejecutando cmd y escribiendo ipconfig: La IP que buscamos es Ipv4)
+4- Abrir App.java y darle a Run as -> Java Application
+5- Una vez hecho esto en el navegador escribir "http://localhost:8080" o "http://ip:8080", donde ip será la IP del propietario
+6- Para que un segundo jugador se una a la partida deberá conectarse en una red LAN con el propietario del proyecto y escribir "http://ip:8080" (no se puede con localhost, pues es necesario acceder al PC del propietario del proyecto)
 
 ## Posibles ampliaciones y visión de futuro.
 En una primera instancia, la versión de salida de nuestro juego tendrá todo lo mencionado con anterioridad. En el caso, los elementos a desarrollar y epxlotar serían nuevas clases de naves con nuevas mecánicas y habilidades, así como nuevos power-ups que cambien el curso de la partida. Asimismo, si vieramos cierta necesidad y feedback del público se podrían meter nuevas características como jugar en escuadrón con amigos, ampliar el número de jugadores por partida, así como la posibilidad de hostear varias partidas al mismo tiempo.
@@ -184,8 +202,15 @@ b00m Productions
 	- Para poder mostrar la funcionalidad de la trampa por la nave que la coloca, hemos implentado que aparezca en una posicion fija  	    del mapa cuando el jugador la lanza, para poder acercarse a ella y que le haga efecto. Si la colocara en su posición, nada mas 	     ponerla se activaría. En la versión final del juego esta se coloca en la posicion de la nave controlable por el jugador y sólo           afectara a naves enemigas.
 - En esta fase no esta disponible la pantalla de esperando jugadores debido a la característica local del juego.
 - En esta fase, no está disponible el chat, el feed ni las bajas cometidas, debido a la ausencia de jugadores enemigos.
-- En esta fase, sólo están disponibles los power-ups 'Armadura' y 'Carga'.
+- En esta fase, sólo están disponibles los power-ups 'Speed Boost' y 'Carga'.
 - En esta fase no está disponible cualquier sonido, tanto música ambiental como efectos de sonido.
 
 
+## **IMPORTANTE:** Notas de los desarrolladores sobre la entrega de la FASE 3
+
+- En esta fase se ha implementado API Rest solo para dos jugadores, dado que nos es imposible probarlo con más personas.
+- En esta fase, no está disponible el chat, el feed ni las bajas cometidas.
+- En esta fase, sólo están disponibles los power-ups 'Speed Boost' y 'Carga'.
+- En esta fase el sonido es solamente local, no se escuchan las ultis o disparos de los enemigos.
+- De momento tan solo es posible el juego en LAN. Esto cambiará para las siguientes entregas.
 
