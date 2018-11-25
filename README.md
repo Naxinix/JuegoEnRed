@@ -167,7 +167,7 @@ Cuando se conecten 5, aparecer√° el nuevo mensaje de aviso 'LA PARTIDA COMENZAR√
 
 Diagrama de clases:
 
-![](https://github.com/Naxinix/JuegoEnRed/blob/master/DiagramaClases.PNG)
+![](https://github.com/Naxinix/JuegoEnRed/blob/master/DiagramaClases.png)
 
 ## Instrucciones de uso.
 1- Descargar la carpeta llamada "CursedStarsBueno"
