@@ -9,6 +9,14 @@ var playersMax = 20;
 
 var win;
 
+var done=false;
+
+var done2=false
+var done3=false;
+var enemyGravActive=false;
+var gravEnemy;
+var areaEnemy;
+bombEnemy = new Array(10);
 
 Project.levelState.prototype = {
 		
@@ -20,7 +28,7 @@ Project.levelState.prototype = {
 	        //se inicializa el mundo con las dimensiones indicadas y se crea el polvo estelar y los blackHoles
 	        //width and height (dimensions of the world), maxP (size of the players list)
 	        initWorld(worldsize[0],worldsize[1],playersMax);
-
+	        //area=game.add.sprite(0,0,null);
 		        
 			if (game.player1.id == 1) {
 				game.player2 = {id: 2}
@@ -49,14 +57,20 @@ Project.levelState.prototype = {
        
     	   game.time.events.add(Phaser.Timer.QUARTER, createPolvoEstelar, this);
     	   game.time.events.add(Phaser.Timer.QUARTER, createBlackHole, this);
+    	   
+    	   sonando=false;
+           music.stop();
+           beamm= game.add.audio('beamm');
+           beamm.loopFull();
+           beamm.volume=0.1;
         
     
+           var sonidofinal=game.add.audio('derrota');
+           var sonidofinal2=game.add.audio('victoria');
        
         //clase es el tipo de nave
         clase = null;
         clase2=new Disrupter(300,200);
-        //claseDummy = null;
-        claseLoot = null;
         switch(game.player1.classS){
             case 1:
             clase = new Disrupter(300,200);
@@ -95,11 +109,12 @@ Project.levelState.prototype = {
         //LOOPS
         game.time.events.loop(Phaser.Timer.SECOND, counterPE, this); //loop de aparicion de polvo estelar
         game.time.events.loop(Phaser.Timer.SECOND, counterBH, this); //loop de aparicion de agujeros negros
-     //   game.time.events.loop(Phaser.Timer.SECOND, createLootShip, this); //loop de aparicion de naves loot
-        game.time.events.loop(Phaser.Timer.SECOND, updateUltimate, this); //loop de la gestion de la carga de ultimates
+        //game.time.events.loop(Phaser.Timer.SECOND, createLootShip, this); //loop de aparicion de naves loot
+        game.time.events.loop(Phaser.Timer.SECOND*3, updateUltimate, this); //loop de la gestion de la carga de ultimates
         game.time.events.loop(Phaser.Timer.SECOND, clase.UltTime, this); //loop de la gestion de la duracion de ultimates
         game.time.events.loop(Phaser.Timer.SECOND, speedBoostTime, this); //loop de gestion del speedBoost
         game.time.events.loop(Phaser.Timer.HALF, trap, this); //loop para gestion de trampa Strategist
+        game.time.events.loop(Phaser.Timer.HALF, trapMe, this); //loop para gestion de trampa Strategist
     },
 
     update: function() {
@@ -109,38 +124,25 @@ Project.levelState.prototype = {
         if(updateSpaceship(0, clase, false)){   //playerIndex (numero identificador del jugador), playerClass (la clase que posee el jugador)
             this.listener();                    //bot (true->Es un bot, false->Es un jugador)
         } 
-        /*
-        if(updateSpaceship(1, clase, false)){
-            claseDummy.weapon.destroy();
-            claseDummy = null;
+      
+        if(clase2.alive==false){
+        	spaceshipParent[1].destroy();
+        	win=true;
+        	this.listener();
         }
         
-        */
-        
-      //  updateLootship(clase); //whoShotMrLootShip (nave que ha dado el tiro de gracia a la nave loot)
+        updateLootship(); 
         updateWorld(clase, 0); //playerClass (nave afectada), playerIndex (numero identificador del jugador)
         updateUltimates(clase, 0); //playerClass (nave a la que afecta el daño), playerIndex (numero identificador del jugador)
-        updateGrav(0); //playerIndex (numero identificador del jugador)
+       // updateGrav(0); //playerIndex (numero identificador del jugador)
 
-        //COLISIONES
-        /*
-        if(players[0] != null){
-            //colision de balas de jugador con nave dummy
-            collisions(1, 0); //shotIndex (indice del que recibe el disparo), shooterIndex (indice del que dispara)
-            
-            //colision de balas de dummy con nave jugador
-            if(claseDummy != null) collisions(0, 1);
 
-            //colision de balas de jugador con nave loot
-            if(claseLoot != null) collisions(20, 0);
-        }
-*/
         
-        game.physics.arcade.collide(spaceshipParent[0], clase2.weapon.bullets, function(enemy, bullet){ bullet.kill(); clase.DMG(clase2.damage);});
-        game.physics.arcade.collide(spaceshipParent[1], clase.weapon.bullets, function(enemy, bullet){ bullet.kill(); clase2.DMG(clase.damage);});
-     
+
         
-        controles();
+       //if(clase.alive) controles();
+       
+       /*
         putPlayer();
         getPlayer( function (updatePlayer2) {
         	game.player2 = JSON.parse(JSON.stringify(updatePlayer2));
@@ -149,6 +151,8 @@ Project.levelState.prototype = {
         	spaceship[1].rotation=game.player2.rot;
         	classSelected2=game.player2.classS;
         	clase2.alive=game.player2.alive;
+        	clase2.usingUlt=game.player2.usingUlt;
+          	enemyGravActive=game.player2.deployed;
         	if(game.player2.disparando){
         		clase2.weapon.fireAngle=(spaceship[1].angle)+360;
         		clase2.weapon.autofire=true;
@@ -157,13 +161,64 @@ Project.levelState.prototype = {
         	}
         	//console.log("Posicion de player 2: " + game.player2 + " actualizada");
         })
-        
-        /*
-        if(state==false){
-        	spaceshipParent[1].destroy();
-        	this.state.start('endingState');
-        }
         */
+        
+        game.physics.arcade.collide(spaceshipParent[0], clase2.weapon.bullets, function(enemy, bullet){
+        	console.log("nave 1 alcanzada");
+        	
+        	clase.DMG(clase2.damage);
+        	
+        	spaceship[0].tint = 0xff5555;
+        	ex1 = explosions.getBottom();
+        	explosions.bringToTop(ex1);
+        	ex1.visible = true;
+        	ex1.x = bullet.x;
+        	ex1.y = bullet.y;
+        	anim = ex1.animations.add('explosion');
+        	anim.play(10, false);
+        	anim.onComplete.add(function(){
+        		explosions.setAll('position.x',-1000);
+        		spaceship[0].tint = 0xffffff;
+        	});
+        	bullet.kill();
+        });
+        game.physics.arcade.collide(spaceshipParent[1], clase.weapon.bullets, function(enemy, bullet){
+        	console.log("nave 2 alcanzada");
+        	
+        	clase2.DMG(clase.damage);
+        	counter += clase.damage*ultMultiplier;
+        	
+        	ex2 = explosions.getBottom();
+        	explosions.bringToTop(ex2);
+        	ex2.visible = true;
+        	ex2.x = bullet.x;
+        	ex2.y = bullet.y;
+        	anim = ex2.animations.add('explosion');
+        	anim.play(10, false);
+        	anim.onComplete.add(function(){
+        		explosions.setAll('position.x',-1000);
+        	});
+        	bullet.kill();
+        });
+        game.physics.arcade.collide(lootShipParent, clase.weapon.bullets, function(enemy, bullet){
+        	console.log("nave loot alcanzada");
+        	ex3 = explosions.getBottom();
+        	explosions.bringToTop(ex3);
+        	ex3.visible = true;
+        	ex3.x = bullet.x;
+        	ex3.y = bullet.y;
+        	anim = ex2.animations.add('explosion');
+        	anim.play(10, false);
+        	anim.onComplete.add(function(){
+        		explosions.setAll('position.x',-1000);
+        	});
+        	bullet.kill();
+        	claseLoot.DMG(clase.damage);
+        });
+
+        game.physics.arcade.overlap(spaceshipParent[1],area,function(){isTrapped=true; game.world.moveUp(area);});
+        game.physics.arcade.overlap(spaceshipParent[0],areaEnemy,function(){imTrapped=true; game.world.moveUp(areaEnemy);});
+        
         if(clase.health<=0){
         	spaceshipParent[0].destroy();
         	win=false;
@@ -176,6 +231,123 @@ Project.levelState.prototype = {
         	win=true;
         	this.state.start('endingState');
         }
+        
+        
+        if(clase2.usingUlt==true && classSelected2==2){
+        	if(!done){
+        	 game.add.tween(spaceship[1]).to( { angle: 1000 }, 3500, Phaser.Easing.Linear.None, true); //Rota el sprite
+        	}
+        		done=true;
+        	    clase2.weapon.trackSprite(spaceship[1], 0, 0, true);
+        	    clase2.weapon.autofire = true; //dispara solo
+        	    clase2.weapon.bulletSpeed = 300;
+        	    clase2.weapon.fireRate = 1;
+        	    //clase2.usingUlt=false;
+        }
+        
+        if(enemyGravActive==true){
+        	if(!done2){
+        		areaEnemy = game.add.sprite(spaceshipParent[1].x,spaceshipParent[1].y,'area2'); //area es el rango de acción del graviton
+        	    game.physics.enable(areaEnemy, Phaser.Physics.ARCADE); 
+        	    //area.visible=false;
+        	    game.world.sendToBack(areaEnemy);
+        	    gravEnemy=game.add.sprite(spaceshipParent[1].x,spaceshipParent[1].y,'graviton');
+        	
+        	}
+        	done2=true;
+        }
+        if(enemyGravActive==false){
+        	if(gravEnemy!=undefined){
+        		gravEnemy.destroy();
+        		done2=false;
+        	}
+        	
+        }
+        /*
+        putPlayer();
+        getPlayer( function (updatePlayer2) {
+        	game.player2 = JSON.parse(JSON.stringify(updatePlayer2));
+        	spaceshipParent[1].x = game.player2.x;
+        	spaceshipParent[1].y = game.player2.y;
+        	spaceship[1].rotation=game.player2.rot;
+        	classSelected2=game.player2.classS;
+        	clase2.alive=game.player2.alive;
+        	clase2.usingUlt=game.player2.usingUlt;
+        	if(game.player2.disparando){
+        		clase2.weapon.fireAngle=(spaceship[1].angle)+360;
+        		clase2.weapon.autofire=true;
+        	}else{
+        		clase2.weapon.autofire=false;
+        	}
+        	//console.log("Posicion de player 2: " + game.player2 + " actualizada");
+        })
+        */
+        if(clase2.usingUlt==false && classSelected2==2){
+        	done=false;
+          //  clase2.weapon.trackSprite(spaceship[1], 0, 0, true);
+    	    //clase2.weapon.autofire = false; //dispara solo
+    	    clase2.weapon.bulletSpeed = 3000;
+    	    clase2.weapon.fireRate = 200;
+        }
+        
+        if(clase2.usingUlt==true && classSelected2==3){
+        	if(!done3){
+        	bombEnemy[0] = game.add.sprite(spaceshipParent[1].x-spaceshipParent[1].offsetX+100,spaceshipParent[1].y-spaceshipParent[1].offsetY+75,'bomb');
+            bombEnemy[1] = game.add.sprite(spaceshipParent[1].x-spaceshipParent[1].offsetX-100,spaceshipParent[1].y-spaceshipParent[1].offsetY+75,'bomb');
+            bombEnemy[2] = game.add.sprite(spaceshipParent[1].x-spaceshipParent[1].offsetX,spaceshipParent[1].y-spaceshipParent[1].offsetY-100,'bomb');
+            //circulo exterior
+            bombEnemy[3] = game.add.sprite(spaceshipParent[1].x-spaceshipParent[1].offsetX+200,spaceshipParent[1].y-spaceshipParent[1].offsetY-175,'bomb');
+            bombEnemy[4] = game.add.sprite(spaceshipParent[1].x-spaceshipParent[1].offsetX-200,spaceshipParent[1].y-spaceshipParent[1].offsetY-175,'bomb');
+            bombEnemy[5] = game.add.sprite(spaceshipParent[1].x-spaceshipParent[1].offsetX,spaceshipParent[1].y-spaceshipParent[1].offsetY+200,'bomb');
+            bombEnemy[6] = game.add.sprite(spaceshipParent[1].x-spaceshipParent[1].offsetX+200,spaceshipParent[1].y-spaceshipParent[1].offsetY+175,'bomb');
+            bombEnemy[7] = game.add.sprite(spaceshipParent[1].x-spaceshipParent[1].offsetX-200,spaceshipParent[1].y-spaceshipParent[1].offsetY+175,'bomb');
+            bombEnemy[8] = game.add.sprite(spaceshipParent[1].x-spaceshipParent[1].offsetX,spaceshipParent[1].y-spaceshipParent[1].offsetY-200,'bomb');
+            bombEnemy[9] = game.add.sprite(spaceshipParent[1].x-spaceshipParent[1].offsetX+200,spaceshipParent[1].y-spaceshipParent[1].offsetY,'bomb');
+            bombEnemy[10] = game.add.sprite(spaceshipParent[1].x-spaceshipParent[1].offsetX-200,spaceshipParent[1].y-spaceshipParent[1].offsetY,'bomb');
+
+            for(n=0;n<10;n++){
+                game.physics.enable(bombEnemy[n], Phaser.Physics.ARCADE);
+            }
+        	}
+        	done3=true;
+        }
+        
+        if(clase.alive) controles();
+        
+        if (game.player1.id == 1){
+        	putWorld();
+        } else {
+        	getWorld( function (updateWorld1) {
+            	game.world1 = JSON.parse(JSON.stringify(updateWorld1));
+            	polvo = game.world1.polvoPos;
+            	lootShip.rotation = game.world1.lsRot;
+            	lootPosX = game.world1.lsPosX;
+            	lootPosY = game.world1.lsPosY;
+            	if(claseLoot != null) claseLoot.health = game.world1.lsHP;
+    	    });
+        	//console.log("Nave Loot en -> x: " + lootPosX + ", y: " + lootPosY);
+        }
+
+        putPlayer();
+        getPlayer( function (updatePlayer2) {
+        	game.player2 = JSON.parse(JSON.stringify(updatePlayer2));
+        	spaceshipParent[1].x = game.player2.x;
+        	spaceshipParent[1].y = game.player2.y;
+        	spaceship[1].rotation=game.player2.rot;
+        	classSelected2=game.player2.classS;
+        	clase2.alive=game.player2.alive;
+        	clase2.usingUlt=game.player2.usingUlt;
+        	clase2.deployed=enemyGravActive;
+        	if(game.player2.disparando){
+        		clase2.weapon.fireAngle=(spaceship[1].angle)+360;
+        		clase2.weapon.autofire=true;
+        	}else{
+        		clase2.weapon.autofire=false;
+        	}
+        	//console.log("Posicion de player 2: " + game.player2 + " actualizada");
+        })
+        
+        
         
     },
     /*
@@ -220,7 +392,7 @@ Project.levelState.prototype = {
         game.debug.body(spaceshipParent[1]);
         game.debug.body(lootShip);*/
     	//game.debug.spriteInfo(spaceshipParent[0]);
-      // game.debug.spriteInfo(spaceship[1]);
+     //  game.debug.spriteInfo(spaceship[0]);
     	
     },
         
