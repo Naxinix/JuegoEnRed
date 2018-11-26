@@ -293,7 +293,7 @@ function createLootShip(){
     spaceshipParent[20] = lootShip;
     
     //se modifica la direccion de la nave loot en un valor aleatorio entre -0.01 y 0.01
-    if(game.player.id==1) lootShipDir = ((game.rnd.frac())*2 - 1)/100;
+    if(game.player1.id==1) lootShipDir = ((game.rnd.frac())*2 - 1)/100;
     if(claseLoot == null){
         //bucle que espera 10 segundos y crea una nave Loot en una posicion random del mundo
         if(auxLS<10){
