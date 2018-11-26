@@ -55,6 +55,7 @@ Project.levelState.prototype = {
 
     create: function() {
        
+	    //es necesario crear el polvo estelar y los agujeros negros un poco mas tarde debido a que api rest no actualiza las variables inmediatamente
     	   game.time.events.add(Phaser.Timer.QUARTER, createPolvoEstelar, this);
     	   game.time.events.add(Phaser.Timer.QUARTER, createBlackHole, this);
     	   
@@ -74,42 +75,31 @@ Project.levelState.prototype = {
         switch(game.player1.classS){
             case 1:
             clase = new Disrupter(300,200);
-           // clase2 = new Disrupter(300,200);
             break;
             case 2:
             clase = new Assault(200,200)
-            //clase2 = new Disrupter(300,200);;
             break;
             case 3:
             clase = new Strategist(200,200);
-            //clase2 = new Disrupter(300,200);
             break;
         }
-       // clase2=clase;
-        //createSpaceship(1, clase2, false, game.player2.x, game.player2.y);
-        
-        
         
         createSpaceship(0, clase, false, game.player1.x, game.player1.y); //playerIndex (numero identificador del jugador), playerClass (la clase que posee el jugador),
                                                     //bot (true->Es un bot, false->Es un jugador), x e y (posicion inicial del jugador)
         
+	//se crea la nave enemiga como disrupter por defecto, y un cuarto de segundo despues se sobreescribe con el valor de classSelected2 correcto
+        //esto se hace por la imposibilidad de recibir de servidor el valor de classSelected2 a tiempo para la creacion de la nave enemiga
         this.crearNaveEnemiga();
         game.time.events.add(Phaser.Timer.QUARTER, this.crearNaveEnemiga, this);
-       // createSpaceship(1, clase, false, game.player2.x, game.player2.y);
-        	//jugador1=game.add.sprite(100,100,'assault');
-        	//jugador2=game.add.sprite(150,150,'disrupter');
+	    
         game.camera.follow(spaceship[0]);
-        
-        //Dummy (solo para las pruebas offline)
-       // claseDummy = new Assault(200,200);
-      
 
         initInterface(); //se inicializa lo ultimo para evitar solapamiento con el resto de objetos
 
         //LOOPS
         game.time.events.loop(Phaser.Timer.SECOND, counterPE, this); //loop de aparicion de polvo estelar
         game.time.events.loop(Phaser.Timer.SECOND, counterBH, this); //loop de aparicion de agujeros negros
-        //game.time.events.loop(Phaser.Timer.SECOND, createLootShip, this); //loop de aparicion de naves loot
+        game.time.events.loop(Phaser.Timer.SECOND, createLootShip, this); //loop de aparicion de naves loot
         game.time.events.loop(Phaser.Timer.SECOND*3, updateUltimate, this); //loop de la gestion de la carga de ultimates
         game.time.events.loop(Phaser.Timer.SECOND, clase.UltTime, this); //loop de la gestion de la duracion de ultimates
         game.time.events.loop(Phaser.Timer.SECOND, speedBoostTime, this); //loop de gestion del speedBoost
@@ -125,49 +115,25 @@ Project.levelState.prototype = {
             this.listener();                    //bot (true->Es un bot, false->Es un jugador)
         } 
       
+	    //actualizar nave de player2
         if(clase2.alive==false){
         	spaceshipParent[1].destroy();
         	win=true;
         	this.listener();
         }
         
-        updateLootship(); 
+        updateLootship();
         updateWorld(clase, 0); //playerClass (nave afectada), playerIndex (numero identificador del jugador)
         updateUltimates(clase, 0); //playerClass (nave a la que afecta el daño), playerIndex (numero identificador del jugador)
-       // updateGrav(0); //playerIndex (numero identificador del jugador)
-
-
+       	//updateGrav(0); //playerIndex (numero identificador del jugador)
         
-
-        
-       //if(clase.alive) controles();
-       
-       /*
-        putPlayer();
-        getPlayer( function (updatePlayer2) {
-        	game.player2 = JSON.parse(JSON.stringify(updatePlayer2));
-        	spaceshipParent[1].x = game.player2.x;
-        	spaceshipParent[1].y = game.player2.y;
-        	spaceship[1].rotation=game.player2.rot;
-        	classSelected2=game.player2.classS;
-        	clase2.alive=game.player2.alive;
-        	clase2.usingUlt=game.player2.usingUlt;
-          	enemyGravActive=game.player2.deployed;
-        	if(game.player2.disparando){
-        		clase2.weapon.fireAngle=(spaceship[1].angle)+360;
-        		clase2.weapon.autofire=true;
-        	}else{
-        		clase2.weapon.autofire=false;
-        	}
-        	//console.log("Posicion de player 2: " + game.player2 + " actualizada");
-        })
-        */
-        
+	    //COLISIONES
         game.physics.arcade.collide(spaceshipParent[0], clase2.weapon.bullets, function(enemy, bullet){
-        	console.log("nave 1 alcanzada");
+        	//console.log("nave 1 alcanzada");
         	
-        	clase.DMG(clase2.damage);
+        	clase.DMG(clase2.damage); //recibe el daño
         	
+		//efecto visual en la nave de una explosion y un color rojo momentaneo
         	spaceship[0].tint = 0xff5555;
         	ex1 = explosions.getBottom();
         	explosions.bringToTop(ex1);
@@ -180,10 +146,11 @@ Project.levelState.prototype = {
         		explosions.setAll('position.x',-1000);
         		spaceship[0].tint = 0xffffff;
         	});
+		
         	bullet.kill();
         });
         game.physics.arcade.collide(spaceshipParent[1], clase.weapon.bullets, function(enemy, bullet){
-        	console.log("nave 2 alcanzada");
+        	//console.log("nave 2 alcanzada");
         	
         	clase2.DMG(clase.damage);
         	counter += clase.damage*ultMultiplier;
@@ -198,9 +165,12 @@ Project.levelState.prototype = {
         	anim.onComplete.add(function(){
         		explosions.setAll('position.x',-1000);
         	});
+		
         	bullet.kill();
         });
         game.physics.arcade.collide(lootShipParent, clase.weapon.bullets, function(enemy, bullet){
+		claseLoot.DMG(clase.damage);
+		
         	console.log("nave loot alcanzada");
         	ex3 = explosions.getBottom();
         	explosions.bringToTop(ex3);
@@ -212,14 +182,14 @@ Project.levelState.prototype = {
         	anim.onComplete.add(function(){
         		explosions.setAll('position.x',-1000);
         	});
+		
         	bullet.kill();
-        	claseLoot.DMG(clase.damage);
         });
-
+	
         game.physics.arcade.overlap(spaceshipParent[1],area,function(){isTrapped=true; game.world.moveUp(area);});
         game.physics.arcade.overlap(spaceshipParent[0],areaEnemy,function(){imTrapped=true; game.world.moveUp(areaEnemy);});
         
-        if(clase.health<=0){
+        /*if(clase.health<=0){
         	spaceshipParent[0].destroy();
         	win=false;
         	clase.alive=false;
@@ -230,9 +200,9 @@ Project.levelState.prototype = {
         	spaceshipParent[1].destroy();
         	win=true;
         	this.state.start('endingState');
-        }
+        }*/
         
-        
+        //para mostrar la ulti del assault correctamente cuando un enemigo la usa
         if(clase2.usingUlt==true && classSelected2==2){
         	if(!done){
         	 game.add.tween(spaceship[1]).to( { angle: 1000 }, 3500, Phaser.Easing.Linear.None, true); //Rota el sprite
@@ -245,6 +215,7 @@ Project.levelState.prototype = {
         	    //clase2.usingUlt=false;
         }
         
+	    //para mostrar la trampa correctamente cuando un enemigo la usa
         if(enemyGravActive==true){
         	if(!done2){
         		areaEnemy = game.add.sprite(spaceshipParent[1].x,spaceshipParent[1].y,'area2'); //area es el rango de acción del graviton
@@ -263,33 +234,17 @@ Project.levelState.prototype = {
         	}
         	
         }
-        /*
-        putPlayer();
-        getPlayer( function (updatePlayer2) {
-        	game.player2 = JSON.parse(JSON.stringify(updatePlayer2));
-        	spaceshipParent[1].x = game.player2.x;
-        	spaceshipParent[1].y = game.player2.y;
-        	spaceship[1].rotation=game.player2.rot;
-        	classSelected2=game.player2.classS;
-        	clase2.alive=game.player2.alive;
-        	clase2.usingUlt=game.player2.usingUlt;
-        	if(game.player2.disparando){
-        		clase2.weapon.fireAngle=(spaceship[1].angle)+360;
-        		clase2.weapon.autofire=true;
-        	}else{
-        		clase2.weapon.autofire=false;
-        	}
-        	//console.log("Posicion de player 2: " + game.player2 + " actualizada");
-        })
-        */
-        if(clase2.usingUlt==false && classSelected2==2){
-        	done=false;
-          //  clase2.weapon.trackSprite(spaceship[1], 0, 0, true);
+        
+	
+        if(clase2.usingUlt == false && classSelected2 == 2){
+            done = false;
+            //clase2.weapon.trackSprite(spaceship[1], 0, 0, true);
     	    //clase2.weapon.autofire = false; //dispara solo
     	    clase2.weapon.bulletSpeed = 3000;
     	    clase2.weapon.fireRate = 200;
         }
         
+	    //para mostrar la ulti del strategist correctamente cuando un enemigo la usa
         if(clase2.usingUlt==true && classSelected2==3){
         	if(!done3){
         	bombEnemy[0] = game.add.sprite(spaceshipParent[1].x-spaceshipParent[1].offsetX+100,spaceshipParent[1].y-spaceshipParent[1].offsetY+75,'bomb');
@@ -314,6 +269,7 @@ Project.levelState.prototype = {
         
         if(clase.alive) controles();
         
+	    //puts y gets necesarios en cada iteracion para actualizar la info
         if (game.player1.id == 1){
         	putWorld();
         } else {
@@ -350,40 +306,7 @@ Project.levelState.prototype = {
         
         
     },
-    /*
-    getPlayer(callback) {
-        $.ajax({
-            method: "GET",
-            url: 'http://localhost:8080/jugadores/' + game.player2.id,
-            processData: false,
-            headers: {
-                "Content-Type": "application/json"
-            }
-        }).done(function (data) {
-            game.player2 = JSON.parse(JSON.stringify(data));
-            callback(data);
-        })
-    },
     
-    // Con este método recuperamos al jugador online (que siempre será considerado PLAYER 2
-    putPlayer() {
-    	game.player1.x = spaceshipParent[0].x;
-    	game.player1.y = spaceshipParent[0].y;
-    	game.player1.rot = spaceshipParent[0].rotation;
-    	game.player1.disparando= clase.fireButton.isDown;
-        $.ajax({
-            method: "PUT",
-            url: 'http://localhost:8080/jugadores/' + game.player1.id,
-            data: JSON.stringify(game.player1),
-            processData: false,
-            headers: {
-                "Content-Type": "application/json"
-            }
-        }).done(function (data) {
-        	//console.log("Actualizada posicion de player 1: " + JSON.stringify(data))
-        })
-    },
-*/
     //Debug de las balas para pruebas sobre parámetros
     render: function(){
         /*clase.weapon.debug();
@@ -392,7 +315,7 @@ Project.levelState.prototype = {
         game.debug.body(spaceshipParent[1]);
         game.debug.body(lootShip);*/
     	//game.debug.spriteInfo(spaceshipParent[0]);
-     //  game.debug.spriteInfo(spaceship[0]);
+     	//game.debug.spriteInfo(spaceship[0]);
     	
     },
         
