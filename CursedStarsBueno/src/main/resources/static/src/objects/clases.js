@@ -181,11 +181,12 @@ function updateGrav(playerIndex){
 */
 //crea el sprite de la nave e inicializa las variables genericas de las naves
 function createSpaceship(playerIndex,playerClass,bot,x,y){
-   
-
+    //se crea un sprite vacio (parent) que contiene como hijo al sprite real y a la lifebar en caso de ser nave enemiga
+	//el parent controla la posicion y el hijo controla la rotacion, de este modo la lifebar se mantiene recta y no rota con el sprite
     spaceshipParent[playerIndex] = game.add.sprite(x, y, null);
     spaceship[playerIndex] = game.add.sprite(0, 0, playerClass.sprite);
     
+    //animacion idle
     idle = spaceship[playerIndex].animations.add('idle');
     spaceship[playerIndex].animations.play('idle', 10, true);
     
@@ -204,9 +205,10 @@ function createSpaceship(playerIndex,playerClass,bot,x,y){
         playerClass.weapon.bulletLifespan = 900;
         playerClass.fireButton = game.input.activePointer.leftButton;
         
-        explosions=game.add.group();
+        //creacion de los hit marker
+        explosions = game.add.group();
         
-        for(var i=0; i<50; i++){
+        for(var i = 0; i < 50; i++){
         	exploAux=game.add.sprite(-1000, -1000, 'hit');
         	exploAux.scale.setTo(0.075,0.075);
         	exploAux.anchor.setTo(0.5,0.5);
@@ -251,17 +253,16 @@ function updateSpaceship(playerIndex, playerClass, bot, target){
     //Rotacion y aceleracion de la naves
     spaceship[playerIndex].rotation = game.physics.arcade.angleToPointer(spaceshipParent[playerIndex]);
     
-   
-        spaceshipParent[playerIndex].body.acceleration.x = 0;
-        spaceshipParent[playerIndex].body.acceleration.y = 0;
-        
-        spaceshipParent[playerIndex].body.angularVelocity = 0;
+    spaceshipParent[playerIndex].body.acceleration.x = 0;
+    spaceshipParent[playerIndex].body.acceleration.y = 0;
 
-        //pasamos los valores de la clase al body de la nave
-        spaceshipParent[playerIndex].body.maxVelocity.x = playerClass.maxSpeed;
-        spaceshipParent[playerIndex].body.maxVelocity.y = playerClass.maxSpeed;
-        spaceshipParent[playerIndex].body.drag.x = playerClass.drag;
-        spaceshipParent[playerIndex].body.drag.y = playerClass.drag;
+    spaceshipParent[playerIndex].body.angularVelocity = 0;
+
+    //pasamos los valores de la clase al body de la nave
+    spaceshipParent[playerIndex].body.maxVelocity.x = playerClass.maxSpeed;
+    spaceshipParent[playerIndex].body.maxVelocity.y = playerClass.maxSpeed;
+    spaceshipParent[playerIndex].body.drag.x = playerClass.drag;
+    spaceshipParent[playerIndex].body.drag.y = playerClass.drag;
     
 
     //si es un bot debera apuntar hacia el jugador y disparar
@@ -274,8 +275,8 @@ function updateSpaceship(playerIndex, playerClass, bot, target){
     if(playerClass != null) if(playerClass.health > 0)
     {
     	if(playerIndex!=0){
-        enemylf2.width = playerClass.maxHealth;
-        enemylf1.width = playerClass.health;
+            enemylf2.width = playerClass.maxHealth;
+            enemylf1.width = playerClass.health;
     	}
     } else
     {
@@ -307,7 +308,8 @@ function createLootShip(){
             	lootPosY=0;
             }
             
-            //sprite vacio para evitar que la barra de vida de la nave gire junto a la misma. lootShipParent contiene a lootShip(el sprite que se visualiza y gira) y la barra de vida.
+            //sprite vacio para evitar que la barra de vida de la nave gire junto a la misma
+            //lootShipParent contiene a lootShip(el sprite que se visualiza y gira) y la barra de vida
             lootShipParent = game.add.sprite(lootPosX, lootPosY, null);
             lootShip = game.add.sprite(0, 0, claseLoot.sprite);
 
