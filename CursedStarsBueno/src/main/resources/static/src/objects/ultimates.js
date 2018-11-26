@@ -1,6 +1,6 @@
 function initUltimates(){
     //variables relativas a las ultis
-	ultMultiplier=0.1;
+    ultMultiplier = 0.1;
     counter = 0; //contador de carga de ultimate. 0-100
     ultCharged = false;
     ultiTime = 0; //tiempo de duracion de la ulti
@@ -11,7 +11,8 @@ function initUltimates(){
 }
 
 //FUNCION DE GESTION DE ULTIMATES
-//El loop llama a esta función cada segundo y va incrementando el contador de ulti. Cuando llega a 100, para de contar y pone la variable de ultimate cargada a verdadero.
+//El loop llama a esta función cada segundo y va incrementando el contador de ulti
+//cuando llega a 100, para de contar y pone la variable de ultimate cargada a verdadero
 function updateUltimate(){
     if(counter<99){
         counter++;
@@ -22,9 +23,7 @@ function updateUltimate(){
 function disrupterUltimate(){
     this.maxHealth = 400;
     this.health = 400;
-    //text2.setText('Health:'+this.health+'/'+this.maxHealth);
     this.maxSpeed = 600;
-    //text3.setText('Speed:'+this.maxSpeed);
 }
 
 //Funcion que controla el tiempo que dura activa la ultimate de disrupter
@@ -119,19 +118,18 @@ function strategistTime(){
 }
 
 function updateUltimates(playerClass,playerIndex){
-	if(counter<99){
-    ulti1.height = counter;
-    text.setText(counter+'%');
-}
-else{
-    ulti1.height=100;
-    text.setText('Q');
-    game.world.bringToTop(text);
+    if(counter<99){
+	ulti1.height = counter;
+	text.setText(counter+'%');
+    }
+    else{
+	ulti1.height=100;
+	text.setText('Q');
+	game.world.bringToTop(text);
     ultCharged = true;
-}
+    }
     //Ulti de strategist -100 de vida al colisionar
     for(j=0; j<10; j++){
-            
         game.physics.arcade.collide(spaceshipParent[playerIndex],bomb[j],function(){bomb[j].kill(); playerClass.DMG(100);});
     }
 }
