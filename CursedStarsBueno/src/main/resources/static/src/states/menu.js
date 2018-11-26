@@ -33,7 +33,7 @@ Project.menuState.prototype = {
     },
 
     create: function() {
-
+	//se crea la animacion de fondo con las naves
     	createBackgroundAnimation();
     	
         var titulo=game.add.sprite(20,20,'titulo');
@@ -44,8 +44,7 @@ Project.menuState.prototype = {
         var play2=null;
         var como2=null;
         
-       // s.scale.setTo(1.5,1);
-        play.scale.setTo(0.7,0.7);
+       	play.scale.setTo(0.7,0.7);
         play.inputEnabled = true;
         play.events.onInputDown.add(this.listener, this);
         play.events.onInputOver.add(overplay, this);
