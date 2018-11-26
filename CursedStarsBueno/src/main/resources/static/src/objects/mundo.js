@@ -7,6 +7,7 @@ function initWorld(width,height,maxP) {
     players = new Array(maxP);
     isLobbyFull = false;
 
+    //arrays de polvo y agujeros negros que comparten la info de la posicion de los mismos con el servidor
     polvo = new Array(50);
     bh = new Array(10);
     
@@ -28,6 +29,7 @@ function initWorld(width,height,maxP) {
 
 //creacion de todo el polvo estelar, pero invisible aun
 function createPolvoEstelar(){
+    //hay 3 colores de polvo que se pueden dibujar de forma aleatoria
     polvoSprite = new Array(3);
     polvoSprite = ['polvoEstelarAzul','polvoEstelarVerde','polvoEstelarAmarillo'];
 
@@ -86,7 +88,8 @@ function createBlackHole(){
         bhArr[m].anchor.setTo(0.5,0.5);
         bhArr[m].body.setCircle(120);//colision circular
     
-        //se añade el sprite en la posicion del agujero negro dividida entre un factor para que entre en las coordenadas del minimapa. Luego se le suma 600 en X y 50 en Y para situarlo en la posicion del minimapa (esquina superior derecha de la pantalla de juego)
+        //se añade el sprite en la posicion del agujero negro dividida entre un factor para que entre en las coordenadas del minimapa
+	//luego se le suma 600 en X y 50 en Y para situarlo en la posicion del minimapa (esquina superior derecha de la pantalla de juego)
         posbh[m] = game.add.sprite(600+((bhArr[m].position.x-bhArr[m].offsetX)/factorX),50+((bhArr[m].position.y-bhArr[m].offsetY)/factorY),'blackhole2');
         posbh[m].fixedToCamera = true;
         posbh[m].scale.setTo(0.7,0.7);
