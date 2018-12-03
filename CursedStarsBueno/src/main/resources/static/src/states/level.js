@@ -293,7 +293,7 @@ Project.levelState.prototype = {
         	classSelected2=game.player2.classS;
         	clase2.alive=game.player2.alive;
         	clase2.usingUlt=game.player2.usingUlt;
-        	clase2.deployed=enemyGravActive;
+        	enemyGravActive=game.player2.deployed;
         	if(game.player2.disparando){
         		clase2.weapon.fireAngle=(spaceship[1].angle)+360;
         		clase2.weapon.autofire=true;
