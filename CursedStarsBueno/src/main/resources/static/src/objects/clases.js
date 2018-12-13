@@ -293,19 +293,19 @@ function createLootShip(){
     spaceshipParent[20] = lootShip;
     
     //se modifica la direccion de la nave loot en un valor aleatorio entre -0.01 y 0.01
-    if(game.player1.id==1) lootShipDir = ((game.rnd.frac())*2 - 1)/100;
+    if(game.player1.id == 1) lootShipDir = ((game.rnd.frac())*2 - 1)/100;
     if(claseLoot == null){
         //bucle que espera 10 segundos y crea una nave Loot en una posicion random del mundo
         if(auxLS<10){
             auxLS++;
         }else{
             claseLoot = new NaveLoot(200,1000);
-            if(game.player1.id==1){
-            lootPosX=Math.floor(Math.random()*(worldsize[0]-200));//margen de 200 pixeles para evitar que se generen en el borde del mundo
-            lootPosY=Math.floor(Math.random()*(worldsize[1]-200));
+            if(game.player1.id == 1){
+            	lootPosX = Math.floor(Math.random()*(worldsize[0]-200));//margen de 200 pixeles para evitar que se generen en el borde del mundo
+            	lootPosY = Math.floor(Math.random()*(worldsize[1]-200));
             }else{
-            	lootPosX=0;
-            	lootPosY=0;
+            	lootPosX = game.world1.lsPosX;
+            	lootPosY = game.world1.lsPosY;
             }
             
             //sprite vacio para evitar que la barra de vida de la nave gire junto a la misma
@@ -346,18 +346,18 @@ function updateLootship(){
 
     //movimiento nave loot
     if(claseLoot != null){
-    	if(game.player1.id==1){
-        //rotacion nave loot
-        lootShip.rotation += lootShipDir
-        
-        //la nave se movera con una velocidad maxSpeed en la direccion que apunta
-        lootShipParent.body.acceleration.x = claseLoot.maxSpeed*Math.cos(lootShip.rotation);
-        lootShipParent.body.acceleration.y = claseLoot.maxSpeed*Math.sin(lootShip.rotation);
-        lootPosX= lootShipParent.x;
-        lootPosY= lootShipParent.y;
+    	if(game.player1.id == 1){
+	        //rotacion nave loot
+	        lootShip.rotation += lootShipDir
+	        
+	        //la nave se movera con una velocidad maxSpeed en la direccion que apunta
+	        lootShipParent.body.acceleration.x = claseLoot.maxSpeed*Math.cos(lootShip.rotation);
+	        lootShipParent.body.acceleration.y = claseLoot.maxSpeed*Math.sin(lootShip.rotation);
+	        lootPosX = lootShipParent.x;
+	        lootPosY = lootShipParent.y;
         }else{
-        	lootShipParent.x=lootPosX;
-        	lootShipParent.y=lootPosY;
+        	lootShipParent.x = lootPosX;
+        	lootShipParent.y = lootPosY;
         }
     }
 
@@ -374,8 +374,8 @@ function updateLootship(){
         claseLoot = null;
         //al morir la nave loot otorga un powerUp aleatorio al jugador que la ha matado
         if(game.player1.id == 1){
-        auxRnd = game.rnd.between(0,1);
-        clase.powerUp[auxRnd] = true;
+        	auxRnd = game.rnd.between(0,1);
+        	clase.powerUp[auxRnd] = true;
         if(auxRnd == 0){
             chargePUsprite.loadTexture('chargePUOn', 0);
         } else if(auxRnd == 1){
