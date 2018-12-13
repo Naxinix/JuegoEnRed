@@ -12,6 +12,7 @@ Project.preloadState.prototype = {
     	
         game.load.image('background','../assets/images/background.jpg');
         game.load.image('minimap','../assets/images/interface/Minimap.jpg');
+        game.load.image('marco_minimap','../assets/images/interface/marco_minimap.jpg');
         game.load.image('position','../assets/images/sprites/position.jpg');
         game.load.image('lf1','../assets/images/interface/lifebar1.jpg');
         game.load.image('lf2','../assets/images/interface/lifebar2.jpg');
@@ -29,9 +30,14 @@ Project.preloadState.prototype = {
         game.load.spritesheet('disrupter','../assets/images/sprites/DisrupterSpriteSheet.png',96,64,5);
         game.load.spritesheet('assault','../assets/images/sprites/AssaultSpriteSheet.png',96,64,2);
         game.load.spritesheet('strategist','../assets/images/sprites/StrategistSpriteSheet.png',96,64,2);
+        game.load.image('assault_static','../assets/images/sprites/assault_static.png');
+        game.load.image('strategist_static','../assets/images/sprites/strategist_static.png');
+        game.load.image('disrupter_static','../assets/images/sprites/disrupter_static.png');
+        game.load.spritesheet('warning','../assets/images/interface/warning_ss.png',100,20,3);
         game.load.image('area','../assets/images/sprites/area.png');
         game.load.image('area2','../assets/images/sprites/area2.jpg');
         game.load.image('bomb','../assets/images/sprites/bomb.png');
+        game.load.spritesheet('bomb_anim','../assets/images/sprites/bomb_anim.png',32,32,2);
         game.load.image('info','../assets/images/interface/info.png');
         game.load.image('select','../assets/images/interface/select.png');
         game.load.image('playselected','../assets/images/interface/playselected.png');
@@ -59,6 +65,8 @@ Project.preloadState.prototype = {
         game.load.image('selectedDisrupter','../assets/images/sprites/SelectedDisrupter.png');
         game.load.image('selectedAssault','../assets/images/sprites/SelectedAssault.png');
         game.load.image('selectedStrategist','../assets/images/sprites/selectedStrategist.png');
+        game.load.image('reaper','../assets/images/sprites/reaper.png');
+        game.load.image('lucio','../assets/images/sprites/lucio.png');
         game.load.image('victoria','../assets/images/interface/victoria.png');
         game.load.spritesheet('hit','../assets/images/sprites/hit.png',330,418,2);
         game.load.image('playersFound0','../assets/images/interface/playersFound0.png');
@@ -71,6 +79,12 @@ Project.preloadState.prototype = {
         game.load.audio('derrota', '../assets/audio/derrota.mp3');
         game.load.audio('ultiassault', '../assets/audio/ultiassault.mp3');
         game.load.audio('ultistrat', '../assets/audio/ultistrat.mp3');
+        game.load.audio('ultimate_ready', '../assets/audio/ultimate_ready.mp3');
+        game.load.audio('musica_level', '../assets/audio/musica_level.mp3');
+        game.load.audio('alarm', '../assets/audio/alarm.mp3');
+        game.load.audio('fuel', '../assets/audio/fuel.mp3');
+        game.load.audio('explosion', '../assets/audio/explosion.mp3');
+        
     },
 
     create: function() {
