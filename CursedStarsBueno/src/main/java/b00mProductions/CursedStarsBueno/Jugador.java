@@ -15,7 +15,6 @@ public class Jugador{
 		
 	}
 
-
 	public long getId() {
 		return id;
 	}
@@ -96,4 +95,13 @@ public class Jugador{
 	public void setDeployed(boolean deployed) {
 		this.deployed = deployed;
 	}
+	
+	
+	@Override
+	public String toString() {
+		String string =  "id: " +id+", x: "+x+", y: "+y+", rot: "+rot+", disparando: "+disparando+", classS: "+classS+", alive: "+alive+", usingUlt: "+usingUlt+", deployed: "+deployed;                      
+		return string;//return "{\"id\":" + id + ",\"x\":" + x + ",\"y\":" + y + ",\"score\":" + score + "}";
+	}
+
+	
 }
