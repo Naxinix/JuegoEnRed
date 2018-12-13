@@ -7,6 +7,7 @@ game.state.add('menuState', Project.menuState)
 game.state.add('controlsState', Project.controlsState)
 game.state.add('chooseState', Project.chooseState)
 game.state.add('matchingState', Project.matchingState)
+game.state.add('matching2State', Project.matching2State)
 game.state.add('levelState', Project.levelState)
 game.state.add('endingState', Project.endingState)
   

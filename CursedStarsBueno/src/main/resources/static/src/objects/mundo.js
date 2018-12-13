@@ -8,8 +8,8 @@ function initWorld(width,height,maxP) {
     isLobbyFull = false;
 
     //arrays de polvo y agujeros negros que comparten la info de la posicion de los mismos con el servidor
-    polvo = new Array(50);
-    bh = new Array(10);
+    polvo = new Array(150);
+    bh = new Array(20);
     
     //Arrays de objetos que aparecerán por el mapa
     polvoArr = new Array(50);
@@ -33,27 +33,27 @@ function createPolvoEstelar(){
     polvoSprite = new Array(3);
     polvoSprite = ['polvoEstelarAzul','polvoEstelarVerde','polvoEstelarAmarillo'];
 
-    for(o=0;o<50;o++){
-        a3=polvo[o][0];
-        b3=polvo[o][1];
+    for(o = 0; o < 50; o++){
+        a3 = polvo[3*o + 0];
+        b3 = polvo[3*o + 1];
         //se añade un sprite aleatorio entre los 3 disponibles
-        polvoArr[o]=game.add.sprite(a3,b3,polvoSprite[game.rnd.between(0,2)]);
+        polvoArr[o] = game.add.sprite(a3,b3,polvoSprite[game.rnd.between(0,2)]);
         game.physics.enable(polvoArr[o], Phaser.Physics.ARCADE);
         
         //se inicializan todos invisibles y luego se hacen visibles con el loop.
         polvoArr[o].visible = false;
-        polvo[o][2]=0;
+        polvo[3*o + 2] = 0;
     }
 }
 
 function counterPE(){
     //bucle para hacer el polvo estelar visible en cada iteracion (cada 5 segundos)
-    if(auxPE<5){
+    if(auxPE < 5){
         auxPE++;
     }else{
-        for(i1=0;i1<50;i1++){
+        for(i1 = 0; i1 < 50; i1++){
         	polvoArr[i1].visible = true;
-        	polvo[i1][2]=1;
+        	polvo[3*i1 + 2] = 1;
         }
         auxPE = 0;
     }
@@ -63,14 +63,14 @@ function updatePolvoEstelar(playerClass, playerIndex){
 	//Overlap y efecto con polvo estelar (aumento de 5 puntos de vida), con restricción para no sumar mas vida si ya esta llena
 	for(j = 0; j < 50; j++){
 		game.physics.arcade.overlap(spaceshipParent[1],polvoArr[j],function(){
-			if(polvo[j][2] == 0){
+			if(polvo[3*j + 2] == 0){
 				polvoArr[j].visible = false;
 			}
 		});
         game.physics.arcade.overlap(spaceshipParent[playerIndex],polvoArr[j],function(){
         	if(polvoArr[j].visible == true){
         		polvoArr[j].visible = false;
-        		polvo[j][2] = 0;
+        		polvo[3*j + 2] = 0;
         		if(playerClass.health <= playerClass.maxHealth) playerClass.DMG(-5);
         	}
         });
@@ -79,17 +79,17 @@ function updatePolvoEstelar(playerClass, playerIndex){
 }
 //creacion de los todos los agujeros negros, pero invisibles aun
 function createBlackHole(){
-    for(m=0;m<10;m++){
-        a=bh[m][0];
-        b=bh[m][1];
+    for(m = 0; m < 10; m++){
+        a = bh[2*m + 0];
+        b = bh[2*m + 1];
         bhArr[m] = game.add.sprite(a,b,'blackhole'); 
         game.physics.enable(bhArr[m], Phaser.Physics.ARCADE);
-        bhArr[m].visible=false;
+        bhArr[m].visible = false;
         bhArr[m].anchor.setTo(0.5,0.5);
         bhArr[m].body.setCircle(120);//colision circular
     
         //se añade el sprite en la posicion del agujero negro dividida entre un factor para que entre en las coordenadas del minimapa
-	//luego se le suma 600 en X y 50 en Y para situarlo en la posicion del minimapa (esquina superior derecha de la pantalla de juego)
+        //luego se le suma 600 en X y 50 en Y para situarlo en la posicion del minimapa (esquina superior derecha de la pantalla de juego)
         posbh[m] = game.add.sprite(600+((bhArr[m].position.x-bhArr[m].offsetX)/factorX),50+((bhArr[m].position.y-bhArr[m].offsetY)/factorY),'blackhole2');
         posbh[m].fixedToCamera = true;
         posbh[m].scale.setTo(0.7,0.7);

@@ -6,6 +6,11 @@ import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
+import com.fasterxml.jackson.databind.JsonNode;
+
+
+
+/*
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,10 +21,12 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+*/
 
 
 
-@RestController
+
+//@RestController
 public class JugadorController {
 	
 	Map<Long, Jugador> jugadores = new ConcurrentHashMap<>();
@@ -28,14 +35,14 @@ public class JugadorController {
 
 
 	// Con GET recuperamos el número de jugadores
-	@GetMapping(value = "/jugadores")
+	//@GetMapping(value = "/jugadores")
 	public Collection<Jugador> getPlayers() {
 		return jugadores.values();
 	}
 
 	// Con POST creamos un nuevo jugador
-	@PostMapping(value = "/jugadores")
-	@ResponseStatus(HttpStatus.CREATED)
+	//@PostMapping(value = "/jugadores")
+	//@ResponseStatus(HttpStatus.CREATED)
 	public Jugador newJugador() {
 		Jugador jugador = new Jugador();
 		long id = nextId.incrementAndGet();
@@ -54,28 +61,34 @@ public class JugadorController {
 
 	// Con este GET, podemos recuperar la información particular de cada uno de los
 	// jugadores
-	@GetMapping(value = "/jugadores/{id}")
-	public ResponseEntity<Jugador> getJugador(@PathVariable long id) {
+	//@GetMapping(value = "/jugadores/{id}")
+	public Jugador getJugador(long id) {
 		Jugador jugador = jugadores.get(id);
-		if (jugador != null) {
-			return new ResponseEntity<>(jugador, HttpStatus.OK);
-		} else {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		return jugador;
+		
+	}
+	
+	public void deleteJugador(long id) {
+		Jugador savedPlayer = jugadores.get(id);
+		if (savedPlayer != null) {
+			jugadores.remove(savedPlayer.getId());
 		}
 	}
+}
+	/*
 
 	// Con este PUT actualizamos la información del jugador con ID = id
-	@PutMapping(value = "/jugadores/{id}")
-	public ResponseEntity<Jugador> updateJugador(@PathVariable long id, @RequestBody Jugador jugador) {
+	//@PutMapping(value = "/jugadores/{id}")
+	public void updateJugador(long id, Jugador jugador) {
 		Jugador savedPlayer = jugadores.get(jugador.getId());
 		if (savedPlayer != null) {
 			jugadores.put(id, jugador);
-			return new ResponseEntity<>(jugador, HttpStatus.OK);
-		} else {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
+			
 	}
 
+	}
+}
+		/*
 	// Con este DELETE borramos el jugador con ID = id
 	@DeleteMapping(value = "/jugadores/{id}")
 	public ResponseEntity<Jugador> borraJugador(@PathVariable long id) {
@@ -88,7 +101,7 @@ public class JugadorController {
 		}
 	}
 	
-
+*/
 	
 	/*
 	
@@ -137,4 +150,4 @@ public class JugadorController {
 		
 	}
 	*/
-}
+
