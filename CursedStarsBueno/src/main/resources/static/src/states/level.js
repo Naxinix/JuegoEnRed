@@ -18,6 +18,7 @@ var enemyGravActive = false;
 var gravEnemy;
 var areaEnemy;
 bombEnemy = new Array(10);
+lootId = 0;
 
 Project.levelState.prototype = {
 		
@@ -46,6 +47,7 @@ Project.levelState.prototype = {
 				alive: game.player1.alive,
 				usingUlt: game.player1.usingUlt,
 				deployed: game.player1.deployed,
+				health: game.player1.health,
 				
 				//put World (innecesario en este momento, por lo que se ponen valores inutiles)
 				polvoPos: polvo,
@@ -65,7 +67,6 @@ Project.levelState.prototype = {
 		}
 		
 		console.log(game.world1);
-		console.log(game.world1.lsHp);
     	
 		/*
 		getWorld( function (updateWorld1) {
@@ -98,22 +99,22 @@ Project.levelState.prototype = {
         
         reaper=game.add.sprite(190,450,'reaper');
         reaper.scale.setTo(0.2,0.2);
-         reaper.fixedToCamera=true;
-         game.physics.enable(reaper, Phaser.Physics.ARCADE);
-         reaper.visible=false;
-
-         lucio=game.add.sprite(190,450,'lucio');
-         lucio.scale.setTo(0.4,0.4);
-         lucio.fixedToCamera=true;
-         game.physics.enable(lucio, Phaser.Physics.ARCADE);
-         lucio.visible=false;
-        	
-         hammond=game.add.sprite(190,450,'hammond');
-         hammond.scale.setTo(0.4,0.4);
-         hammond.fixedToCamera=true;
-         game.physics.enable(hammond, Phaser.Physics.ARCADE);
-         hammond.visible=false;
-         
+        reaper.fixedToCamera=true;
+        game.physics.enable(reaper, Phaser.Physics.ARCADE);
+        reaper.visible=false;
+        
+        lucio=game.add.sprite(190,450,'lucio');
+        lucio.scale.setTo(0.4,0.4);
+        lucio.fixedToCamera=true;
+        game.physics.enable(lucio, Phaser.Physics.ARCADE);
+        lucio.visible=false;
+        
+        hammond=game.add.sprite(190,450,'hammond');
+        hammond.scale.setTo(0.4,0.4);
+        hammond.fixedToCamera=true;
+        game.physics.enable(hammond, Phaser.Physics.ARCADE);
+        hammond.visible=false;
+        
     	sonando = false;
     	music.stop();
     	beamm = game.add.audio('beamm');
@@ -197,19 +198,21 @@ Project.levelState.prototype = {
     	updateInterface(); //evita que los elementos de la interfaz se solapen entre si
         //devuelve true cuando la nave muere
         if(updateSpaceship(0, clase, false)){   //playerIndex (numero identificador del jugador), playerClass (la clase que posee el jugador)
-            this.listener();                    //bot (true->Es un bot, false->Es un jugador)
-        } 
-      
-	    //actualizar nave de player2
-        if(clase2.alive == false){
-        	spaceshipParent[1].destroy();
-        	win = true;
+        	win = false;                    		//bot (true->Es un bot, false->Es un jugador)
         	this.listener();
         }
         
-        updateLootship();
+	    //actualizar nave de player2
+        if(updateSpaceship(1, clase2, false)){
+        	win = true;
+            this.listener();
+        }
+        
+        updateLootship(lootId);
         updateWorld(clase, 0); //playerClass (nave afectada), playerIndex (numero identificador del jugador)
         updateUltimates(clase, 0); //playerClass (nave a la que afecta el daño), playerIndex (numero identificador del jugador)
+        
+        lootId = 0;
         
 	    //COLISIONES
         game.physics.arcade.collide(spaceshipParent[0], clase2.weapon.bullets, function(enemy, bullet){
@@ -252,6 +255,7 @@ Project.levelState.prototype = {
         });
         game.physics.arcade.collide(lootShipParent, clase.weapon.bullets, function(enemy, bullet){
         	
+        	lootId = game.player1.id;
         	claseLoot.DMG(clase.damage);
 		
         	console.log("nave loot alcanzada");
@@ -271,19 +275,6 @@ Project.levelState.prototype = {
 	
         game.physics.arcade.overlap(spaceshipParent[1],area,function(){isTrapped=true; game.world.moveUp(area);});
         game.physics.arcade.overlap(spaceshipParent[0],areaEnemy,function(){imTrapped=true; game.world.moveUp(areaEnemy);});
-        
-        /*if(clase.health<=0){
-        	spaceshipParent[0].destroy();
-        	win=false;
-        	clase.alive=false;
-        	putPlayer();
-        	this.state.start('endingState');
-        }
-        if(clase2.alive==false){
-        	spaceshipParent[1].destroy();
-        	win=true;
-        	this.state.start('endingState');
-        }*/
         
         //para mostrar la ulti del assault correctamente cuando un enemigo la usa
         if(clase2.usingUlt == true && classSelected2 == 2){
@@ -330,32 +321,32 @@ Project.levelState.prototype = {
 	    //para mostrar la ulti del strategist correctamente cuando un enemigo la usa
         if(clase2.usingUlt==true && classSelected2==3){
         	if(!done3){
-        	bombEnemy[0] = game.add.sprite(spaceshipParent[1].x-spaceshipParent[1].offsetX+100,spaceshipParent[1].y-spaceshipParent[1].offsetY+75,'bomb_anim');
-            bombEnemy[1] = game.add.sprite(spaceshipParent[1].x-spaceshipParent[1].offsetX-100,spaceshipParent[1].y-spaceshipParent[1].offsetY+75,'bomb_anim');
-            bombEnemy[2] = game.add.sprite(spaceshipParent[1].x-spaceshipParent[1].offsetX,spaceshipParent[1].y-spaceshipParent[1].offsetY-100,'bomb_anim');
-            //circulo exterior
-            bombEnemy[3] = game.add.sprite(spaceshipParent[1].x-spaceshipParent[1].offsetX+200,spaceshipParent[1].y-spaceshipParent[1].offsetY-175,'bomb_anim');
-            bombEnemy[4] = game.add.sprite(spaceshipParent[1].x-spaceshipParent[1].offsetX-200,spaceshipParent[1].y-spaceshipParent[1].offsetY-175,'bomb_anim');
-            bombEnemy[5] = game.add.sprite(spaceshipParent[1].x-spaceshipParent[1].offsetX,spaceshipParent[1].y-spaceshipParent[1].offsetY+200,'bomb_anim');
-            bombEnemy[6] = game.add.sprite(spaceshipParent[1].x-spaceshipParent[1].offsetX+200,spaceshipParent[1].y-spaceshipParent[1].offsetY+175,'bomb_anim');
-            bombEnemy[7] = game.add.sprite(spaceshipParent[1].x-spaceshipParent[1].offsetX-200,spaceshipParent[1].y-spaceshipParent[1].offsetY+175,'bomb_anim');
-            bombEnemy[8] = game.add.sprite(spaceshipParent[1].x-spaceshipParent[1].offsetX,spaceshipParent[1].y-spaceshipParent[1].offsetY-200,'bomb_anim');
-            bombEnemy[9] = game.add.sprite(spaceshipParent[1].x-spaceshipParent[1].offsetX+200,spaceshipParent[1].y-spaceshipParent[1].offsetY,'bomb_anim');
-            bombEnemy[10] = game.add.sprite(spaceshipParent[1].x-spaceshipParent[1].offsetX-200,spaceshipParent[1].y-spaceshipParent[1].offsetY,'bomb_anim');
-
-            for(n=0;n<11;n++){
-                game.physics.enable(bombEnemy[n], Phaser.Physics.ARCADE);
-                idle5 = bombEnemy[n].animations.add('idle5');
-                bombEnemy[n].animations.play('idle5', 3, true);
-            }
+	        	bombEnemy[0] = game.add.sprite(spaceshipParent[1].x-spaceshipParent[1].offsetX+100,spaceshipParent[1].y-spaceshipParent[1].offsetY+75,'bomb_anim');
+	            bombEnemy[1] = game.add.sprite(spaceshipParent[1].x-spaceshipParent[1].offsetX-100,spaceshipParent[1].y-spaceshipParent[1].offsetY+75,'bomb_anim');
+	            bombEnemy[2] = game.add.sprite(spaceshipParent[1].x-spaceshipParent[1].offsetX,spaceshipParent[1].y-spaceshipParent[1].offsetY-100,'bomb_anim');
+	            //circulo exterior
+	            bombEnemy[3] = game.add.sprite(spaceshipParent[1].x-spaceshipParent[1].offsetX+200,spaceshipParent[1].y-spaceshipParent[1].offsetY-175,'bomb_anim');
+	            bombEnemy[4] = game.add.sprite(spaceshipParent[1].x-spaceshipParent[1].offsetX-200,spaceshipParent[1].y-spaceshipParent[1].offsetY-175,'bomb_anim');
+	            bombEnemy[5] = game.add.sprite(spaceshipParent[1].x-spaceshipParent[1].offsetX,spaceshipParent[1].y-spaceshipParent[1].offsetY+200,'bomb_anim');
+	            bombEnemy[6] = game.add.sprite(spaceshipParent[1].x-spaceshipParent[1].offsetX+200,spaceshipParent[1].y-spaceshipParent[1].offsetY+175,'bomb_anim');
+	            bombEnemy[7] = game.add.sprite(spaceshipParent[1].x-spaceshipParent[1].offsetX-200,spaceshipParent[1].y-spaceshipParent[1].offsetY+175,'bomb_anim');
+	            bombEnemy[8] = game.add.sprite(spaceshipParent[1].x-spaceshipParent[1].offsetX,spaceshipParent[1].y-spaceshipParent[1].offsetY-200,'bomb_anim');
+	            bombEnemy[9] = game.add.sprite(spaceshipParent[1].x-spaceshipParent[1].offsetX+200,spaceshipParent[1].y-spaceshipParent[1].offsetY,'bomb_anim');
+	            bombEnemy[10] = game.add.sprite(spaceshipParent[1].x-spaceshipParent[1].offsetX-200,spaceshipParent[1].y-spaceshipParent[1].offsetY,'bomb_anim');
+	
+	            for(n=0;n<11;n++){
+	                game.physics.enable(bombEnemy[n], Phaser.Physics.ARCADE);
+	                idle5 = bombEnemy[n].animations.add('idle5');
+	                bombEnemy[n].animations.play('idle5', 3, true);
+	            }
         	}
         	done3=true;
         }
         for(j=0; j<11; j++){
-        game.physics.arcade.collide(spaceshipParent[0],bombEnemy[j],function(){explosion.play(); bombEnemy[j].kill(); clase.DMG(100);});
+        	game.physics.arcade.collide(spaceshipParent[0],bombEnemy[j],function(){explosion.play(); bombEnemy[j].kill(); clase.DMG(100);});
         }
         for(k=0; k<11; k++){
-        game.physics.arcade.collide(spaceshipParent[1],bomb[j],function(){explosion.play(); bomb[j].kill();});
+        	game.physics.arcade.collide(spaceshipParent[1],bomb[j],function(){explosion.play(); bomb[j].kill();});
         }
         
         if(clase.alive) controles();
@@ -378,6 +369,7 @@ Project.levelState.prototype = {
 				alive: clase.alive,
 				usingUlt: clase.usingUlt,
 				deployed: gravActive,
+				health: clase.health,
 				
 				//put World
 				polvoPos: polvo,
@@ -393,11 +385,12 @@ Project.levelState.prototype = {
 		//get Player
 		spaceshipParent[1].x = game.player2.x;
     	spaceshipParent[1].y = game.player2.y;
-    	spaceship[1].rotation=game.player2.rot;
+    	spaceship[1].rotation = game.player2.rot;
     	classSelected2 = game.player2.classS;
     	clase2.alive = game.player2.alive;
     	clase2.usingUlt = game.player2.usingUlt;
     	enemyGravActive = game.player2.deployed;
+    	clase2.health = game.player2.health;
     	if(game.player2.disparando){
     		clase2.weapon.fireAngle = (spaceship[1].angle)+360;
     		clase2.weapon.autofire = true;
@@ -411,7 +404,10 @@ Project.levelState.prototype = {
 	    	lootShip.rotation = game.world1.lsRot;
 	    	lootPosX = game.world1.lsPosX;
 	    	lootPosY = game.world1.lsPosY;
-	    	if(claseLoot != null) claseLoot.health = game.world1.lsHp;
+    	}
+    	
+    	if(claseLoot != null) if(claseLoot.health > game.world1.lsHp) {
+    		claseLoot.health = game.world1.lsHp;
     	}
     	
         /*
