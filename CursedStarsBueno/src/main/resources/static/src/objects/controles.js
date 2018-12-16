@@ -130,6 +130,8 @@ function controles() {
               }
               else if(classSelected==2){
                   reaper.visible=false;
+              }else if(classSelected==3){
+            	  hammond.visible=false;
               }
             ultCharged = 0;
             counter = 0;
