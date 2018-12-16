@@ -9,6 +9,7 @@ public class Jugador{
 	private boolean alive;
 	private boolean usingUlt;
 	private boolean deployed;
+	private int health;
 	
 	
 	Jugador(){
@@ -101,6 +102,14 @@ public class Jugador{
 	public String toString() {
 		String string =  "id: " +id+", x: "+x+", y: "+y+", rot: "+rot+", disparando: "+disparando+", classS: "+classS+", alive: "+alive+", usingUlt: "+usingUlt+", deployed: "+deployed;                      
 		return string;//return "{\"id\":" + id + ",\"x\":" + x + ",\"y\":" + y + ",\"score\":" + score + "}";
+	}
+
+	public int getHealth() {
+		return health;
+	}
+
+	public void setHealth(int health) {
+		this.health = health;
 	}
 
 	

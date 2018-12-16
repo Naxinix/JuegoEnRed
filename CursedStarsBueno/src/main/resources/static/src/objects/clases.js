@@ -274,7 +274,7 @@ function updateSpaceship(playerIndex, playerClass, bot, target){
     //representacion visual de la salud de la nave y gestion de la muerte de la misma
     if(playerClass != null) if(playerClass.health > 0)
     {
-    	if(playerIndex!=0){
+    	if(playerIndex != 0){
             enemylf2.width = playerClass.maxHealth;
             enemylf1.width = playerClass.health;
     	}
@@ -282,8 +282,7 @@ function updateSpaceship(playerIndex, playerClass, bot, target){
     {
         enemylf1.width = 0;
         spaceshipParent[playerIndex].destroy();
-        win=false;
-        clase.alive=false;
+        playerClass.alive = false;
         return true;
     }
 }
@@ -342,7 +341,7 @@ function createLootShip(){
     }
 }
 
-function updateLootship(){
+function updateLootship(lootKillerId){
 
     //movimiento nave loot
     if(claseLoot != null){
@@ -373,14 +372,15 @@ function updateLootship(){
         lootShip.kill();
         claseLoot = null;
         //al morir la nave loot otorga un powerUp aleatorio al jugador que la ha matado
-        if(game.player1.id == 1){
+        if(game.player1.id == lootKillerId){
         	auxRnd = game.rnd.between(0,1);
         	clase.powerUp[auxRnd] = true;
-        if(auxRnd == 0){
-            chargePUsprite.loadTexture('chargePUOn', 0);
-        } else if(auxRnd == 1){
-            speedBoostPUsprite.loadTexture('speedBoostPUOn', 0);
+        	
+	        if(auxRnd == 0){
+	            chargePUsprite.loadTexture('chargePUOn', 0);
+	        } else if(auxRnd == 1){
+	            speedBoostPUsprite.loadTexture('speedBoostPUOn', 0);
+	        }
         }
     }
-  }
 }

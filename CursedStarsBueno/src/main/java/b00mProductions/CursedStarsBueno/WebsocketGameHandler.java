@@ -65,6 +65,7 @@ public class WebsocketGameHandler extends TextWebSocketHandler {
 					jsonPlayer.put("alive", jugador.isAlive());
 					jsonPlayer.put("usingUlt", jugador.isUsingUlt());
 					jsonPlayer.put("deployed", jugador.isDeployed());
+					jsonPlayer.put("health", jugador.getHealth());
 
 					json.put("type", "PLAYER_CREATED");
 					json.putPOJO("player", jsonPlayer);
@@ -141,6 +142,7 @@ public class WebsocketGameHandler extends TextWebSocketHandler {
 				jugador.setAlive(node.get("content").get("alive").asBoolean());
 				jugador.setUsingUlt(node.get("content").get("usingUlt").asBoolean());
 				jugador.setDeployed(node.get("content").get("deployed").asBoolean());
+				jugador.setHealth(node.get("content").get("health").asInt());
 				
 				
 				jsonPlayer1.put("x", jugador.getX());
@@ -151,6 +153,7 @@ public class WebsocketGameHandler extends TextWebSocketHandler {
 				jsonPlayer1.put("alive", jugador.isAlive());
 				jsonPlayer1.put("usingUlt", jugador.isUsingUlt());
 				jsonPlayer1.put("deployed", jugador.isDeployed());
+				jsonPlayer1.put("health", jugador.getHealth());
 				
 				json.put("type", "UPDATE_STATE");
 				json.putPOJO("player", jsonPlayer1);
@@ -207,7 +210,10 @@ public class WebsocketGameHandler extends TextWebSocketHandler {
 				if (debug)
 					System.out.println("[DEBUG] " + json.toString());
 				break;
-
+				
+			case "END":
+				jugadorController.clearJugadores();
+				break;
 			default:
 				break;
 			}
