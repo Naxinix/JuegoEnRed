@@ -6,25 +6,6 @@ import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
-import com.fasterxml.jackson.databind.JsonNode;
-
-
-
-/*
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
-*/
-
-
-
 
 //@RestController
 public class JugadorController {
@@ -55,6 +36,7 @@ public class JugadorController {
 		jugador.setClassS(0);
 		jugador.setUsingUlt(false);
 		jugador.setDeployed(false);
+		jugador.setHealth(200);
 		jugadores.put(jugador.getId(), jugador);
 		return jugador;
 	}
@@ -72,7 +54,13 @@ public class JugadorController {
 		Jugador savedPlayer = jugadores.get(id);
 		if (savedPlayer != null) {
 			jugadores.remove(savedPlayer.getId());
+			nextId.decrementAndGet();
 		}
+	}
+	
+	public void clearJugadores() {
+		jugadores.clear();
+		nextId.set(0);
 	}
 }
 	/*
