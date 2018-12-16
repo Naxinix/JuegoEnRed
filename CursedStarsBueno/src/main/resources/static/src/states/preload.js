@@ -67,6 +67,7 @@ Project.preloadState.prototype = {
         game.load.image('selectedStrategist','../assets/images/sprites/selectedStrategist.png');
         game.load.image('reaper','../assets/images/sprites/reaper.png');
         game.load.image('lucio','../assets/images/sprites/lucio.png');
+        game.load.image('hammond','../assets/images/sprites/hammond.png');
         game.load.image('victoria','../assets/images/interface/victoria.png');
         game.load.spritesheet('hit','../assets/images/sprites/hit.png',330,418,2);
         game.load.image('playersFound0','../assets/images/interface/playersFound0.png');
