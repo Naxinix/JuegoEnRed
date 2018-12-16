@@ -108,6 +108,12 @@ Project.levelState.prototype = {
          game.physics.enable(lucio, Phaser.Physics.ARCADE);
          lucio.visible=false;
         	
+         hammond=game.add.sprite(190,450,'hammond');
+         hammond.scale.setTo(0.4,0.4);
+         hammond.fixedToCamera=true;
+         game.physics.enable(hammond, Phaser.Physics.ARCADE);
+         hammond.visible=false;
+         
     	sonando = false;
     	music.stop();
     	beamm = game.add.audio('beamm');
