@@ -37,7 +37,7 @@ Además del ataque básico, cada nave cuenta con un ataque especial (o ultimate)
 Clases: Disrupter, Assault, Strategist
 - **Disrupter**:
 
-![]( https://github.com/Naxinix/JuegoEnRed/blob/master/Arte%20final/distupter_static.png)
+![]( https://github.com/Naxinix/JuegoEnRed/blob/master/Arte%20final/disrupter_static.png)
 
   La principal ventaja de la disrupter es su velocidad de movimiento, superior a la de las otras clases. Esto le permite entrar y salir de la batalla con mucha facilidad, asi como ser un objetivo dificil de acertar.
 
