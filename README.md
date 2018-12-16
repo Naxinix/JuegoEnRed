@@ -4,7 +4,7 @@ Cursed Stars
 ## Plataforma 
 PC
 ## Versión
-2.0
+3.0
 ## Sinopsis, jugabilidad y contenido
     Descripcion
 Se trata de un juego en 2D ambientado en el espacio en el que cada jugador maneja una nave en un entorno limitado.
@@ -61,7 +61,7 @@ Clases: Disrupter, Assault, Strategist
 
   Esta habilidad puede ser reposicionada en cualquier momento, pero solo se puede tener una activa a la vez. Una vez un enemigo la activa, la trampa desaparece.
 
-  **Ultimate**: La nave suelta bombas en un radio próximo que explotarán al contacto enemigo. Estas bombas tienen una vida de 100 HP y pueden ser destruidas simplemente disparando. Las bombas durarán hasta que la destruyan o hasta que pase un tiempo determinado.
+  **Ultimate**: La nave suelta bombas en un radio próximo a la misma que explotarán al contacto enemigo. 
 
 
 
@@ -123,6 +123,7 @@ Cuando se conecten 5, aparecerá el nuevo mensaje de aviso 'LA PARTIDA COMENZAR�
 
 - Si un jugador se desconecta durante el tiempo del temporizador, volverá a aparecer el mensaje de buscando jugadores.
 
+
 ## Estados del Juego e Interfaz.
 
 ![]( https://github.com/Naxinix/JuegoEnRed/blob/master/Diagrama.png)
@@ -165,9 +166,17 @@ Cuando se conecten 5, aparecerá el nuevo mensaje de aviso 'LA PARTIDA COMENZAR�
 
 ![](https://github.com/Naxinix/JuegoEnRed/blob/master/repository/Escenas/Finales/Ending.JPG)
 
-Diagrama de clases:
+Diagrama de clases (FASE 3 API REST):
 
 ![](https://github.com/Naxinix/JuegoEnRed/blob/master/DiagramaClases.png)
+
+Diagrama de class (FASE 4 WEBSOCKETS):
+
+En esta fase la implementación de nuestro juego ha evolucionado de API Rest a Websockets. Para ello hemos establecido dos manejadores (uno en el cliente y otro en el servidor) que se envían mensajes JSON entre sí (convertidos a string para el envío y parseandolos para su recibimiento)
+
+En el lado del servidor tenemos el WebSocketHandler, el 'buzón' del servidor que recibe los mensajes del cliente, mientras que en el lado del cliente es el App quien se encarga de recibir las respuestas de este. Estos mensajes incluyen, entre otros, parámetros del juador y del mundo. Mediante este flujo de mensajes, que se envían a la vez a todos los clientes conectados al servidor, todos los jugadores actualizan a la vez su juego y se consigue una solución mas óptima que la petición-respuesta que haciamos en API Rest.
+
+
 
 ## Instrucciones de uso.
 1- Descargar la carpeta llamada "CursedStarsBueno"
@@ -217,5 +226,14 @@ b00m Productions
 - En esta fase, no está disponible el chat, el feed ni las bajas cometidas.
 - En esta fase, sólo están disponibles los power-ups 'Speed Boost' y 'Carga'.
 - En esta fase el sonido es solamente local, no se escuchan las ultis o disparos de los enemigos.
-- De momento tan solo es posible el juego en LAN. Esto cambiará para las siguientes entregas.
+
+
+## **IMPORTANTE:** Notas de los desarrolladores sobre la entrega de la FASE 4
+
+- En esta fase se ha implementado el juego con websockets solo para dos jugadores, dado que nos es imposible probarlo con más personas.
+- Se ha mejorado bastante el juego estéticamente hablando.
+- Las ideas iniciales del chat, el feed y las bajas cometidas han sido desechadas por el hecho de que no tiene sentido siendo un juego para dos jugadores. Si que nos gustaría conseguir que se pudieran meter más personas en un futuro e implementar estas ideas.
+- Al final nos quedamos con los power-ups 'Speed Boost' y 'Carga', debido a la cantidad de problemas que han dado las pruebas con los demás.
+- Decidimos dejar el sonido solamente local.
+- El juego funciona en red LAN
 
