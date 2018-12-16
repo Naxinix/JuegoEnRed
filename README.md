@@ -34,7 +34,7 @@ Además del ataque básico, cada nave cuenta con un ataque especial (o ultimate)
 Clases: Disrupter, Assault, Strategist
 - **Disrupter**:
 
-![]( https://github.com/Naxinix/JuegoEnRed/blob/master/Arte%20final/Disrupter.png)
+![]( https://github.com/Naxinix/JuegoEnRed/blob/master/Arte%20final/distupter_static.png)
 
   La principal ventaja de la disrupter es su velocidad de movimiento, superior a la de las otras clases. Esto le permite entrar y salir de la batalla con mucha facilidad, asi como ser un objetivo dificil de acertar.
 
@@ -44,7 +44,7 @@ Clases: Disrupter, Assault, Strategist
 
 - **Assault**:
 
-![]( https://github.com/Naxinix/JuegoEnRed/blob/master/Arte%20final/Assault.png)
+![]( https://github.com/Naxinix/JuegoEnRed/blob/master/Arte%20final/assault_static.png)
 
   La nave assault se caraceriza por su precisión en el disparo (las balas salen siguiendo una línea recta, no hay dispersión) y por su daño por segundo, superior a las de las otras clases.
   
@@ -53,7 +53,7 @@ Clases: Disrupter, Assault, Strategist
   **Ultimate**: La nave empieza a rotar sobre sí misma, soltando una gran cantidad de balas al mismo tiempo. Estas balas son más fuertes que las normales y dañan a cualquier nave enemiga que se acerque a cierta distancia.
 - **Strategist**:
 
-![]( https://github.com/Naxinix/JuegoEnRed/blob/master/Arte%20final/Strategist.png)
+![]( https://github.com/Naxinix/JuegoEnRed/blob/master/Arte%20final/strategist_static.png)
 
   La principal característica de la nave strategist es su capacidad para colocar trampas.
 
@@ -160,7 +160,7 @@ Cuando se conecten 5, aparecerá el nuevo mensaje de aviso 'LA PARTIDA COMENZAR�
   - Power ups disponibles. En la esquina inferior izquierda de la pantalla.
   - Feed. En el centro izquierda de la pantalla.
   
- ![](https://github.com/Naxinix/JuegoEnRed/blob/master/repository/Escenas/Finales/PantallaDeJuego.JPG)
+ ![](https://github.com/Naxinix/JuegoEnRed/blob/master/repository/Escenas/PANTALLA_JUEGO.jpg)
   
 - La **pantalla de victoria** o de **game over**, dependiendo de nuestro resultado, y en ambas dos botones, uno de 'reintentar' que nos lleva a la pantalla de selección de nave y otro de 'salir' que nos lleva a la pantalla de menú.
 
@@ -176,6 +176,7 @@ En esta fase la implementación de nuestro juego ha evolucionado de API Rest a W
 
 En el lado del servidor tenemos el WebSocketHandler, el 'buzón' del servidor que recibe los mensajes del cliente, mientras que en el lado del cliente es el App quien se encarga de recibir las respuestas de este. Estos mensajes incluyen, entre otros, parámetros del juador y del mundo. Mediante este flujo de mensajes, que se envían a la vez a todos los clientes conectados al servidor, todos los jugadores actualizan a la vez su juego y se consigue una solución mas óptima que la petición-respuesta que haciamos en API Rest.
 
+![](https://github.com/Naxinix/JuegoEnRed/blob/master/repository/Escenas/ws.png)
 
 
 ## Instrucciones de uso.
