@@ -10,7 +10,8 @@ var playersMax = 20;
 var win;
 
 var done=false;
-
+var donee=false;
+var doneee=false;
 var done2 = false
 var done3 = false;
 var enemyGravActive = false;
@@ -89,11 +90,48 @@ Project.levelState.prototype = {
     	game.time.events.add(Phaser.Timer.QUARTER, createPolvoEstelar, this);
     	game.time.events.add(Phaser.Timer.QUARTER, createBlackHole, this);
     	
+    	warning=game.add.sprite(50,478,'warning');
+        idle3 = warning.animations.add('idle3');
+        warning.fixedToCamera=true;
+        game.physics.enable(warning, Phaser.Physics.ARCADE);
+        warning.visible=false;
+        
+        reaper=game.add.sprite(190,450,'reaper');
+        reaper.scale.setTo(0.2,0.2);
+         reaper.fixedToCamera=true;
+         game.physics.enable(reaper, Phaser.Physics.ARCADE);
+         reaper.visible=false;
+
+         lucio=game.add.sprite(190,450,'lucio');
+         lucio.scale.setTo(0.4,0.4);
+         lucio.fixedToCamera=true;
+         game.physics.enable(lucio, Phaser.Physics.ARCADE);
+         lucio.visible=false;
+        	
+         hammond=game.add.sprite(190,450,'hammond');
+         hammond.scale.setTo(0.4,0.4);
+         hammond.fixedToCamera=true;
+         game.physics.enable(hammond, Phaser.Physics.ARCADE);
+         hammond.visible=false;
+         
     	sonando = false;
     	music.stop();
     	beamm = game.add.audio('beamm');
     	beamm.loopFull();
     	beamm.volume = 0.1;
+    	ultimate_ready=game.add.audio('ultimate_ready');
+        musica_level=game.add.audio('musica_level');
+        musica_level.play();
+        musica_level.volume=0.7;
+
+        alarm=game.add.audio('alarm');
+        alarm.volume=0.5;
+
+        fuel=game.add.audio('fuel');
+        fuel.volume=0.3;
+
+        explosion=game.add.audio('explosion');
+        explosion.volume=0.3;
     
 
     	var sonidofinal = game.add.audio('derrota');
@@ -292,24 +330,32 @@ Project.levelState.prototype = {
 	    //para mostrar la ulti del strategist correctamente cuando un enemigo la usa
         if(clase2.usingUlt==true && classSelected2==3){
         	if(!done3){
-        	bombEnemy[0] = game.add.sprite(spaceshipParent[1].x-spaceshipParent[1].offsetX+100,spaceshipParent[1].y-spaceshipParent[1].offsetY+75,'bomb');
-            bombEnemy[1] = game.add.sprite(spaceshipParent[1].x-spaceshipParent[1].offsetX-100,spaceshipParent[1].y-spaceshipParent[1].offsetY+75,'bomb');
-            bombEnemy[2] = game.add.sprite(spaceshipParent[1].x-spaceshipParent[1].offsetX,spaceshipParent[1].y-spaceshipParent[1].offsetY-100,'bomb');
+        	bombEnemy[0] = game.add.sprite(spaceshipParent[1].x-spaceshipParent[1].offsetX+100,spaceshipParent[1].y-spaceshipParent[1].offsetY+75,'bomb_anim');
+            bombEnemy[1] = game.add.sprite(spaceshipParent[1].x-spaceshipParent[1].offsetX-100,spaceshipParent[1].y-spaceshipParent[1].offsetY+75,'bomb_anim');
+            bombEnemy[2] = game.add.sprite(spaceshipParent[1].x-spaceshipParent[1].offsetX,spaceshipParent[1].y-spaceshipParent[1].offsetY-100,'bomb_anim');
             //circulo exterior
-            bombEnemy[3] = game.add.sprite(spaceshipParent[1].x-spaceshipParent[1].offsetX+200,spaceshipParent[1].y-spaceshipParent[1].offsetY-175,'bomb');
-            bombEnemy[4] = game.add.sprite(spaceshipParent[1].x-spaceshipParent[1].offsetX-200,spaceshipParent[1].y-spaceshipParent[1].offsetY-175,'bomb');
-            bombEnemy[5] = game.add.sprite(spaceshipParent[1].x-spaceshipParent[1].offsetX,spaceshipParent[1].y-spaceshipParent[1].offsetY+200,'bomb');
-            bombEnemy[6] = game.add.sprite(spaceshipParent[1].x-spaceshipParent[1].offsetX+200,spaceshipParent[1].y-spaceshipParent[1].offsetY+175,'bomb');
-            bombEnemy[7] = game.add.sprite(spaceshipParent[1].x-spaceshipParent[1].offsetX-200,spaceshipParent[1].y-spaceshipParent[1].offsetY+175,'bomb');
-            bombEnemy[8] = game.add.sprite(spaceshipParent[1].x-spaceshipParent[1].offsetX,spaceshipParent[1].y-spaceshipParent[1].offsetY-200,'bomb');
-            bombEnemy[9] = game.add.sprite(spaceshipParent[1].x-spaceshipParent[1].offsetX+200,spaceshipParent[1].y-spaceshipParent[1].offsetY,'bomb');
-            bombEnemy[10] = game.add.sprite(spaceshipParent[1].x-spaceshipParent[1].offsetX-200,spaceshipParent[1].y-spaceshipParent[1].offsetY,'bomb');
+            bombEnemy[3] = game.add.sprite(spaceshipParent[1].x-spaceshipParent[1].offsetX+200,spaceshipParent[1].y-spaceshipParent[1].offsetY-175,'bomb_anim');
+            bombEnemy[4] = game.add.sprite(spaceshipParent[1].x-spaceshipParent[1].offsetX-200,spaceshipParent[1].y-spaceshipParent[1].offsetY-175,'bomb_anim');
+            bombEnemy[5] = game.add.sprite(spaceshipParent[1].x-spaceshipParent[1].offsetX,spaceshipParent[1].y-spaceshipParent[1].offsetY+200,'bomb_anim');
+            bombEnemy[6] = game.add.sprite(spaceshipParent[1].x-spaceshipParent[1].offsetX+200,spaceshipParent[1].y-spaceshipParent[1].offsetY+175,'bomb_anim');
+            bombEnemy[7] = game.add.sprite(spaceshipParent[1].x-spaceshipParent[1].offsetX-200,spaceshipParent[1].y-spaceshipParent[1].offsetY+175,'bomb_anim');
+            bombEnemy[8] = game.add.sprite(spaceshipParent[1].x-spaceshipParent[1].offsetX,spaceshipParent[1].y-spaceshipParent[1].offsetY-200,'bomb_anim');
+            bombEnemy[9] = game.add.sprite(spaceshipParent[1].x-spaceshipParent[1].offsetX+200,spaceshipParent[1].y-spaceshipParent[1].offsetY,'bomb_anim');
+            bombEnemy[10] = game.add.sprite(spaceshipParent[1].x-spaceshipParent[1].offsetX-200,spaceshipParent[1].y-spaceshipParent[1].offsetY,'bomb_anim');
 
-            for(n=0;n<10;n++){
+            for(n=0;n<11;n++){
                 game.physics.enable(bombEnemy[n], Phaser.Physics.ARCADE);
+                idle5 = bombEnemy[n].animations.add('idle5');
+                bombEnemy[n].animations.play('idle5', 3, true);
             }
         	}
         	done3=true;
+        }
+        for(j=0; j<11; j++){
+        game.physics.arcade.collide(spaceshipParent[0],bombEnemy[j],function(){explosion.play(); bombEnemy[j].kill(); clase.DMG(100);});
+        }
+        for(k=0; k<11; k++){
+        game.physics.arcade.collide(spaceshipParent[1],bomb[j],function(){explosion.play(); bomb[j].kill();});
         }
         
         if(clase.alive) controles();

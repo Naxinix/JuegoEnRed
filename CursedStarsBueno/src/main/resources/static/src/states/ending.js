@@ -17,6 +17,7 @@ Project.endingState.prototype = {
     var s = game.add.sprite(0, 0, 'background');
     s.scale.setTo(1.5,1);
   //  var sonidofinal;
+    musica_level.stop();
 
    if(!win){
    var gameover = game.add.sprite(40, 50, 'gameover');

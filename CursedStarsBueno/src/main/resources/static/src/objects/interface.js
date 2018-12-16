@@ -34,8 +34,10 @@ function initInterface(){
     speedBoostPUsprite.fixedToCamera = true;
 
     //MINIMAPA
+    marco_minimap=  game.add.sprite(588,38,'marco_minimap')
     minimap = game.add.sprite(600,50,'minimap');
     minimap.fixedToCamera = true;
+    marco_minimap.fixedToCamera=true;
 }
 
 function updateInterface(){
@@ -68,6 +70,20 @@ function updateInterface(){
     {
         lf2.width = clase.maxHealth;
         lf1.width = clase.health;
+        if(lf1.width<200/3){
+            if(!alarm.isPlaying)
+            alarm.play();
+
+           //lf1.tint=2;
+           warning.visible=true;
+           // idle3 = warning.animations.add('idle3');
+           warning.animations.play('idle3', 8, true);
+        }
+       else{
+          // lf1.tint=0;
+           warning.visible=false;
+        alarm.stop();
+       } 
     } else
     {
         lf1.width = 0;

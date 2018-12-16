@@ -3,32 +3,143 @@ function controles() {
     if (game.input.keyboard.isDown(Phaser.Keyboard.S))
     {
         spaceshipParent[0].body.acceleration.y = clase.maxSpeed;
+        if(!donee){
+
+            if(classSelected==1){
+            spaceship[0].loadTexture('disrupter');
+
+             }else if(classSelected==2){
+            spaceship[0].loadTexture('assault');
+
+            
+             }else if(classSelected==3){
+            spaceship[0].loadTexture('strategist');
+             }
+
+            donee=true;
+            }
+        spaceship[0].animations.play('idle', 6, false);
+      
+       
+       if(!fuel.isPlaying){
+            fuel.play();
+        }
     }
     //Arriba
     if (game.input.keyboard.isDown(Phaser.Keyboard.W))
     {
         spaceshipParent[0].body.acceleration.y = -clase.maxSpeed;
+        if(!donee){
+
+            if(classSelected==1){
+            	spaceship[0].loadTexture('disrupter');
+
+             }else if(classSelected==2){
+            	 spaceship[0].loadTexture('assault');
+
+            
+             }else if(classSelected==3){
+            	 spaceship[0].loadTexture('strategist');
+             }
+
+            donee=true;
+            }
+        spaceship[0].animations.play('idle', 6, false);
+      
+       
+       if(!fuel.isPlaying){
+            fuel.play();
+        }
     }
     //Izquiera
     if (game.input.keyboard.isDown(Phaser.Keyboard.A))
     {
         spaceshipParent[0].body.acceleration.x = -clase.maxSpeed;
+        if(!donee){
+
+            if(classSelected==1){
+            	spaceship[0].loadTexture('disrupter');
+
+             }else if(classSelected==2){
+            	 spaceship[0].loadTexture('assault');
+
+            
+             }else if(classSelected==3){
+            	 spaceship[0].loadTexture('strategist');
+             }
+
+            donee=true;
+            }
+        spaceship[0].animations.play('idle', 6, false);
+      
+       
+       if(!fuel.isPlaying){
+            fuel.play();
+        }
     }
     //Derecha
     if (game.input.keyboard.isDown(Phaser.Keyboard.D))
     {
         spaceshipParent[0].body.acceleration.x = clase.maxSpeed;
+        if(!donee){
+
+            if(classSelected==1){
+            	spaceship[0].loadTexture('disrupter');
+
+             }else if(classSelected==2){
+            	 spaceship[0].loadTexture('assault');
+
+            
+             }else if(classSelected==3){
+            	 spaceship[0].loadTexture('strategist');
+             }
+
+            donee=true;
+            }
+        spaceship[0].animations.play('idle', 6, false);
+      
+       
+       if(!fuel.isPlaying){
+            fuel.play();
+        }
     }
+    
+    if(!game.input.keyboard.isDown(Phaser.Keyboard.S) && !game.input.keyboard.isDown(Phaser.Keyboard.W)
+            && !game.input.keyboard.isDown(Phaser.Keyboard.A) && !game.input.keyboard.isDown(Phaser.Keyboard.D)){
+                fuel.stop();
+              
+                //clase.sprite='assault_static';
+                if(classSelected==1){
+                spaceship[0].loadTexture('disrupter_static',0);
+                }
+                 if(classSelected==2){
+                spaceship[0].loadTexture('assault_static',0);
+                 }
+                if (classSelected==3){
+                spaceship[0].loadTexture('strategist_static',0);
+                }
+                donee=false;
+               //animationreference.isPlaying=false;
+            }
     //Activar ultimate (si está cargada)
     if (game.input.keyboard.isDown(Phaser.Keyboard.Q))
     {
         if(ultCharged){
+        	  if(classSelected==1){
+                  lucio.visible=false;
+              }
+              else if(classSelected==2){
+                  reaper.visible=false;
+              }else if(classSelected==3){
+            	  hammond.visible=false;
+              }
             ultCharged = 0;
             counter = 0;
             ultiTime = 0;
             ultused = true;
             clase.usingUlt=true;
             clase.Ultimate();
+            doneee=false;
         }
     }
         

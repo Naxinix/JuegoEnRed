@@ -81,24 +81,31 @@ function assaultTime(){
 
 //Ultimate de strategist
 function strategistUltimate(){
+	ultistrat.play();
     //Circulo interior y exterior. Las bombas se disponen formando dos circulos //concentricos.
     //circulo interior
-	ultistrat.play();
-    bomb[0] = game.add.sprite(spaceshipParent[0].x-spaceshipParent[0].offsetX+100,spaceshipParent[0].y-spaceshipParent[0].offsetY+75,'bomb');
-    bomb[1] = game.add.sprite(spaceshipParent[0].x-spaceshipParent[0].offsetX-100,spaceshipParent[0].y-spaceshipParent[0].offsetY+75,'bomb');
-    bomb[2] = game.add.sprite(spaceshipParent[0].x-spaceshipParent[0].offsetX,spaceshipParent[0].y-spaceshipParent[0].offsetY-100,'bomb');
-    //circulo exterior
-    bomb[3] = game.add.sprite(spaceshipParent[0].x-spaceshipParent[0].offsetX+200,spaceshipParent[0].y-spaceshipParent[0].offsetY-175,'bomb');
-    bomb[4] = game.add.sprite(spaceshipParent[0].x-spaceshipParent[0].offsetX-200,spaceshipParent[0].y-spaceshipParent[0].offsetY-175,'bomb');
-    bomb[5] = game.add.sprite(spaceshipParent[0].x-spaceshipParent[0].offsetX,spaceshipParent[0].y-spaceshipParent[0].offsetY+200,'bomb');
-    bomb[6] = game.add.sprite(spaceshipParent[0].x-spaceshipParent[0].offsetX+200,spaceshipParent[0].y-spaceshipParent[0].offsetY+175,'bomb');
-    bomb[7] = game.add.sprite(spaceshipParent[0].x-spaceshipParent[0].offsetX-200,spaceshipParent[0].y-spaceshipParent[0].offsetY+175,'bomb');
-    bomb[8] = game.add.sprite(spaceshipParent[0].x-spaceshipParent[0].offsetX,spaceshipParent[0].y-spaceshipParent[0].offsetY-200,'bomb');
-    bomb[9] = game.add.sprite(spaceshipParent[0].x-spaceshipParent[0].offsetX+200,spaceshipParent[0].y-spaceshipParent[0].offsetY,'bomb');
-    bomb[10] = game.add.sprite(spaceshipParent[0].x-spaceshipParent[0].offsetX-200,spaceshipParent[0].y-spaceshipParent[0].offsetY,'bomb');
+	bomb[0] = game.add.sprite(spaceshipParent[0].x-spaceshipParent[0].offsetX+100,spaceshipParent[0].y-spaceshipParent[0].offsetY+75,'bomb_anim');
+    //idle4 = bomb[0].animations.add('idle4');
+    //bomb[0].animations.play('idle4', 3, true);
 
-    for(n=0;n<10;n++){
+    bomb[1] = game.add.sprite(spaceshipParent[0].x-spaceshipParent[0].offsetX-100,spaceshipParent[0].y-spaceshipParent[0].offsetY+75,'bomb_anim');
+    bomb[2] = game.add.sprite(spaceshipParent[0].x-spaceshipParent[0].offsetX,spaceshipParent[0].y-spaceshipParent[0].offsetY-100,'bomb_anim');
+    //circulo exterior
+    bomb[3] = game.add.sprite(spaceshipParent[0].x-spaceshipParent[0].offsetX+200,spaceshipParent[0].y-spaceshipParent[0].offsetY-175,'bomb_anim');
+    bomb[4] = game.add.sprite(spaceshipParent[0].x-spaceshipParent[0].offsetX-200,spaceshipParent[0].y-spaceshipParent[0].offsetY-175,'bomb_anim');
+    bomb[5] = game.add.sprite(spaceshipParent[0].x-spaceshipParent[0].offsetX,spaceshipParent[0].y-spaceshipParent[0].offsetY+200,'bomb_anim');
+    bomb[6] = game.add.sprite(spaceshipParent[0].x-spaceshipParent[0].offsetX+200,spaceshipParent[0].y-spaceshipParent[0].offsetY+175,'bomb_anim');
+    bomb[7] = game.add.sprite(spaceshipParent[0].x-spaceshipParent[0].offsetX-200,spaceshipParent[0].y-spaceshipParent[0].offsetY+175,'bomb_anim');
+    bomb[8] = game.add.sprite(spaceshipParent[0].x-spaceshipParent[0].offsetX,spaceshipParent[0].y-spaceshipParent[0].offsetY-200,'bomb_anim');
+    bomb[9] = game.add.sprite(spaceshipParent[0].x-spaceshipParent[0].offsetX+200,spaceshipParent[0].y-spaceshipParent[0].offsetY,'bomb_anim');
+    bomb[10] = game.add.sprite(spaceshipParent[0].x-spaceshipParent[0].offsetX-200,spaceshipParent[0].y-spaceshipParent[0].offsetY,'bomb_anim');
+
+    for(n=0;n<11;n++){
         game.physics.enable(bomb[n], Phaser.Physics.ARCADE);
+        idle4 = bomb[n].animations.add('idle4');
+        bomb[n].animations.play('idle4', 3, true);
+     
+       // bomb[n].animations.play('idle4', 10, true);
     }
     ultCharged = false;
 }
@@ -126,10 +133,28 @@ function updateUltimates(playerClass,playerIndex){
 	ulti1.height=100;
 	text.setText('Q');
 	game.world.bringToTop(text);
+	
+     if(!doneee){
+     ultimate_ready.play();
+     doneee=true;
+     }
+     if(classSelected==1){
+         lucio.visible=true;
+     }
+     else if(classSelected==2){
+         
+         reaper.visible=true; 
+         
+     }else if(classSelected==3){
+    	 hammond.visible=true;
+     }
+     
     ultCharged = true;
     }
     //Ulti de strategist -100 de vida al colisionar
+    /*
     for(j=0; j<10; j++){
         game.physics.arcade.collide(spaceshipParent[playerIndex],bomb[j],function(){bomb[j].kill(); playerClass.DMG(100);});
     }
+    */
 }
