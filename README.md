@@ -6,6 +6,9 @@ PC
 ## Versión
 3.0
 ## Sinopsis, jugabilidad y contenido
+    Gameplay
+[![IMAGE ALT TEXT HERE](http://img.youtube.com/vi/baTsZfuft4g/0.jpg)](http://www.youtube.com/watch?v=baTsZfuft4g)
+
     Descripcion
 Se trata de un juego en 2D ambientado en el espacio en el que cada jugador maneja una nave en un entorno limitado.
 
