@@ -187,7 +187,7 @@ En el lado del servidor tenemos el WebSocketHandler, el 'buzón' del servidor qu
 
 2- Abrir el proyecto con sts
 
-3- Abrir communication.js -> Ctrl+F y buscar localhost para hacer un replace All con tu ip (disponible ejecutando cmd y escribiendo ipconfig: La IP que buscamos es Ipv4)
+3- Abrir app.js -> Ctrl+F y buscar localhost para hacer un replace con tu ip (disponible ejecutando cmd y escribiendo ipconfig: La IP que buscamos es Ipv4)
 
 4- Abrir App.java y darle a Run as -> Java Application
 
