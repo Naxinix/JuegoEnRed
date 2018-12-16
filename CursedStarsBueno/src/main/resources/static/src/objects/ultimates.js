@@ -143,7 +143,10 @@ function updateUltimates(playerClass,playerIndex){
      }
      else if(classSelected==2){
          
-         reaper.visible=true;        
+         reaper.visible=true; 
+         
+     }else if(classSelected==3){
+    	 hammond.visible=true;
      }
      
     ultCharged = true;
